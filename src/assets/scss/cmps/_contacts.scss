@@ -1,0 +1,45 @@
+.contacts{
+
+    .contact{
+        display: flex;
+        align-items: center;
+        margin-bottom: 10px;
+        cursor: pointer;
+        .avatar{
+            border: 1px black solid;
+            width: 1.5em;
+            height: 1.5em;
+            border-radius: 50%;
+        }
+
+        .info{
+            margin-inline-start: 1em;
+            display: flex;
+            flex-direction: column;
+            .phone{
+                font-size: .7em;
+            }
+        }
+    }
+
+    button.fa-s{
+        background-color: hsl(348deg 82% 62%);
+        border: none;
+        border-radius: 50%;
+
+        width: 55px;
+        height: 55px;
+        position: fixed;
+        bottom: 5.5%;
+        right: 5.5%;
+        color: white;
+        &::before{
+            content: '\2b';
+            font-size: 1.5rem;
+        }
+    }
+}
+
+.active{
+    color: pink;
+}

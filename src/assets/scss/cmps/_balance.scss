@@ -1,0 +1,18 @@
+.balance-container{
+
+    .balance{
+
+
+        .btc{
+            display: flex;
+            align-items: center;
+            .fa-b{
+                &::before{
+                    content: '\f15a';
+                }
+            }
+        }
+    
+    }
+}
+

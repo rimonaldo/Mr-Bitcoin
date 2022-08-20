@@ -1,0 +1,27 @@
+.send-coins {
+  position: fixed;
+  margin-left: auto;
+  margin-right: auto;
+  left: 0;
+  right: 0;
+  top: 40%;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  width: 30%;
+
+  >*{
+    
+  }
+  input {
+    margin-block-end: 5px;
+}
+button{
+    width: 100%;
+    margin: 0 auto;
+    background-color: rgba(0, 0, 128, 0);
+    border: 1px gray solid;
+    border-radius: 20px;
+    
+  }
+}

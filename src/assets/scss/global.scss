@@ -1,0 +1,47 @@
+// Externals
+
+// Setup
+@import "setup/variables";
+@import "setup/functions";
+@import "setup/mixins";
+
+// Basics
+@import "basics/typography";
+@import "basics/base";
+@import "basics/helpers";
+@import "basics/layout";
+@import "basics/modals";
+@import "basics/animations";
+
+// Pages
+@import "pages/contact-details";
+@import "pages/home";
+
+// Components
+@import "cmps/send-coins";
+@import "cmps/contact-filter";
+@import "cmps/contacts";
+@import "cmps/header";
+@import "cmps/balance";
+@import "cmps/robot-list";
+@import "cmps/robot-preview";
+@import "cmps/robot-filter";
+
+.main-app {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    .app-header {
+        
+        background-color: #e91e63;
+    }
+
+    main {
+        flex-grow: 1;
+    }
+
+    > footer {
+        background-color: #111;
+        color: white;
+    }
+}

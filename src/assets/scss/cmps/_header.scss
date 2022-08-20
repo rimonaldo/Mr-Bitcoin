@@ -1,0 +1,16 @@
+.header{
+    justify-content: space-between;
+    z-index: 1;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    padding: $layout-padding ;
+
+    .contacts-link{
+        &::before{
+            content: '\f0c0';
+            margin-inline-end: 5px;
+            cursor: pointer;
+        }
+    }
+}
