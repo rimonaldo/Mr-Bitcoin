@@ -2,6 +2,7 @@ import React from "react";
 import { userService } from "../services/userService";
 import { bitcoinService } from "../services/bitcoinService";
 import { BarChart } from "../cmps/LineChart.jsx";
+import { Moves } from "../cmps/Moves";
 export class HomePage extends React.Component {
   state = {
     user: {},
@@ -44,39 +45,56 @@ export class HomePage extends React.Component {
     };
 
     const rawDb = await bitcoinService.getMarketPrice();
+    return this.formatChartData(rawDb, chartData);
+  }
+
+  formatChartData(rawDb, chartData) {
+    let currDay;
     rawDb.forEach((day) => {
       currDay = new Date(day.x * 1000);
-      currDay = currDay.getMonth()+1 + "." + currDay.getDate();
+      currDay = currDay.getMonth() + 1 + "." + currDay.getDate();
       chartData.labels.push(currDay);
-      chartData.datasets[0].data.push(day.y/1000);
+      chartData.datasets[0].data.push(this.formatCoins(day.y));
     });
     return chartData;
   }
 
-  setChartDate(){
-
+  formatCoins(price) {
+    return price / 1000;
   }
+
+  setChartDate() {}
 
   render() {
     const { user, chartData, rate } = this.state;
     if (!chartData) return <div>Loading...</div>;
     return (
-      <section className="home container">
-        <header>Hi,{user.name}</header>
-        <div className="balance-container">
-          <div className="balance">
-            <header>CURRENT BALANCE</header>
-            <div className="btc">
-              BTC: <div className="fa-b"></div>
-              {user.coins}
+      <section>
+        <section className="home container">
+          <header>Hi, {user.name}</header>
+          <div className="balance-container">
+            <div className="balance">
+              <div className="b-header">CURRENT BALANCE</div>
+              <div className="btc">
+                BTC:{" "}
+                <div>
+                  <div className="fa-b"></div>
+                  <span>{user.coins}</span>
+                </div>
+              </div>
+              <span>
+                USD: ${(user.coins * rate).toFixed(2).toLocaleString()}
+              </span>
             </div>
-            <span>USD: ${(user.coins * rate).toLocaleString()}</span>
+
+            <div className="rate-container">
+              <div className="b-header">CURRENT PRICE PER COIN</div>
+              <div className="rate">${rate.toLocaleString()}</div>
+            </div>
           </div>
-        </div>
-        {chartData ? <BarChart chartData={chartData} /> : ""}
-        <header>CURRENT BTC USD</header>
-        <div className="btc-usd">$7000</div>
-        <div className="moves"></div>
+          {chartData ? <BarChart chartData={chartData} /> : ""}
+        </section>
+        <Moves amount={5} rate={rate} />
       </section>
     );
   }

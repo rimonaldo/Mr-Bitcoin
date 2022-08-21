@@ -4,13 +4,14 @@
     height: 50px;
     display: flex;
     align-items: center;
-    padding: $layout-padding ;
+    padding: 0 $layout-padding ;
 
     .contacts-link{
         &::before{
             content: '\f0c0';
             margin-inline-end: 5px;
             cursor: pointer;
+            font-size: 1.3em;
         }
     }
 }

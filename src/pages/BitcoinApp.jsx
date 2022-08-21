@@ -2,8 +2,8 @@ import { Component } from "react";
 import "../assets/scss/global.scss";
 import { HomePage } from "./HomePage";
 import { Header } from "../cmps/Header";
-import { ContactPage } from "./ContactPage";
-import { ContactDetailsPage } from "./ContactDetailsPage";
+import { ContactPage } from "./contact/ContactPage";
+import { ContactDetailsPage } from "./contact/ContactDetailsPage";
 import { setLoggedUser } from "../store/actions/userActions";
 import {
   HashRouter as Router,
@@ -12,7 +12,7 @@ import {
   Redirect,
 } from "react-router-dom";
 import { SignupPage } from "./SignupPage";
-import { ContactEdit } from "./ContactEdit";
+import { ContactEdit } from "./contact/ContactEdit";
 import { connect } from "react-redux";
 import { userService } from "../services/userService";
 const PrivateRoute = (props) => {
@@ -53,7 +53,7 @@ class _BitcoinApp extends Component {
           <Switch>
             <Route path="/contact/edit/:id?" component={ContactEdit} />
             <PrivateRoute path="/contact/:id" component={ContactDetailsPage} />
-            <Route path="/contact" component={ContactPage}/>
+            <AuthRoute path="/contact" component={ContactPage}/>
             <Route
               path="/signup"
               component={SignupPage}

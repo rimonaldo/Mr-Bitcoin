@@ -1,5 +1,5 @@
 import { Component, createRef } from "react";
-import { contactService } from "../services/contactService";
+import { contactService } from "../../services/contactService";
 export class ContactEdit extends Component {
   state = {
     contact: null,

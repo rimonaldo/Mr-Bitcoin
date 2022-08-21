@@ -1,13 +1,13 @@
 import React from "react";
-import { contactService } from "../services/contactService";
-import { ContactList } from "../cmps/ContactList";
+import { contactService } from "../../services/contactService";
+import { ContactList } from "../../cmps/ContactList";
 import { connect } from "react-redux";
 import {
   loadContacts,
   removeContact,
   setFilterBy,
-} from "../store/actions/contactActions";
-import { ContactFilter } from "../cmps/ContactFilter";
+} from "../../store/actions/contactActions";
+import { ContactFilter } from "../../cmps/ContactFilter";
 class _ContactPage extends React.Component {
   state = {
     filterBy: null,

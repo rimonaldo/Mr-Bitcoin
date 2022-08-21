@@ -1,18 +1,39 @@
-.balance-container{
+.balance-container {
+  display: flex;
+  justify-content: space-between;
 
-    .balance{
+  .b-header {
+    color: gray;
+    font-size: 12px;
+  }
 
 
-        .btc{
-            display: flex;
-            align-items: center;
-            .fa-b{
-                &::before{
-                    content: '\f15a';
-                }
-            }
-        }
-    
+  .balance{
+    >*{
+        
     }
-}
+  }
+  .btc {
+    display: flex;
+    div {
+      margin-inline-start: 4px;
+      display: flex;
+      align-items: center;
 
+      .fa-b {
+        font-size: 14px;
+        margin-inline-end: 2px;
+        &::before {
+            content: "\f15a";
+          }
+      }
+    }
+  }
+
+  .rate-container {
+    .rate {
+      text-align: center;
+      font-size: 2em;
+    }
+  }
+}

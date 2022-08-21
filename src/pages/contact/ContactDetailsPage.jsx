@@ -1,9 +1,9 @@
 import React from "react";
-import { contactService } from "../services/contactService";
+import { contactService } from "../../services/contactService";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
-import { removeContact } from "../store/actions/contactActions";
-import { sendCoins,saveUser } from "../store/actions/userActions";
+import { removeContact } from "../../store/actions/contactActions";
+import { sendCoins,saveUser } from "../../store/actions/userActions";
 export class _ContactDetailsPage extends React.Component {
   state = {
     contact: null,
@@ -12,7 +12,6 @@ export class _ContactDetailsPage extends React.Component {
 
   // SET CONTACT FROM URL PARAMS
   async componentDidMount() {
-    console.log(this.props);
     const contactId = this.props.match.params.id;
     const contact = await contactService.getContactById(contactId);
     this.setState({ contact });
@@ -34,8 +33,8 @@ export class _ContactDetailsPage extends React.Component {
   onSendCoins = async (ev) => {
     ev.preventDefault()
     const {amount} = this.state
-    console.log(amount);
-    await this.props.sendCoins(amount);
+    const to = this.state.contact
+    await this.props.sendCoins(amount,to);
     const userToUpadte = this.props.user 
     this.props.saveUser(userToUpadte)
   };
@@ -44,7 +43,6 @@ export class _ContactDetailsPage extends React.Component {
     const field = target.name;
     const value = target.type === "number" ? +target.value || "" : target.value;
     this.setState((prevState) => ({ [field]: value }));
-    
   }
 
 

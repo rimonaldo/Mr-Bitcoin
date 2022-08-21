@@ -25,10 +25,11 @@ export function saveUser(userToUpadte) {
 
 
 
-export function sendCoins(amount) {
+export function sendCoins(amount,to) {
   return async (dispatch) => {
     try {
-      dispatch({ type: "SEND_COINS", amount});
+      // userService.addMove(amount)
+      dispatch({ type: "SEND_COINS", amount , to});
     } catch (err) {
       console.log(err);
     }

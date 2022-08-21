@@ -1,7 +1,6 @@
-import { userService } from "../../services/userService";
-
 const INITIAL_STATE = {
   loggedUser: JSON.parse(sessionStorage.getItem("loggedUser")) || null,
+  moves:JSON.parse(localStorage.getItem("userMoves")) || [],
 };
 
 export function userReducer(state = INITIAL_STATE, action) {
@@ -14,10 +13,14 @@ export function userReducer(state = INITIAL_STATE, action) {
       };
 
     case "SEND_COINS":
-      const { loggedUser } = state;
+      const { loggedUser} = state;
+      const move = {from:loggedUser.name, at:Date.now(), amount:action.amount, to:action.to }
+      let moves = loggedUser.moves
+      if (!moves || !moves.length) moves = []
+      moves.push(move)
       return {
         ...state,
-        loggedUser: { ...loggedUser, coins: loggedUser.coins - action.amount },
+        loggedUser: { ...loggedUser, coins: loggedUser.coins - action.amount , moves},
       };
 
     case "SAVE_USER":

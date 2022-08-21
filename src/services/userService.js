@@ -36,10 +36,17 @@ function signup(name) {
   return newUser;
 }
 
-function addMove(amount) {
-  const loggedUser = getUser();
-  loggedUser.coins -= amount;
-  saveUser(loggedUser);
+async function addMove(amount) {
+  const loggedUser = await getUser();
+  const move = {from:loggedUser.name, at:Date.now(), amount}
+  let moves = loggedUser.moves
+
+  console.log(moves);
+  if (!moves || !moves.length) moves = []
+  console.log(moves);
+  moves.push(move)
+  console.log(moves);
+  // saveUser(loggedUser)
 }
 
 function saveUser(user) {

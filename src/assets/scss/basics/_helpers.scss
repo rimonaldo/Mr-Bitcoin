@@ -143,3 +143,11 @@
 .fa-b{
     font-family: fa-brands;
 }
+
+header.main{
+    background-color: rgba(0, 0, 0, 0.5);
+    border: none;
+    width: 100%;
+    padding:0 $layout-padding;
+    height: 2em;
+}

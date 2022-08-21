@@ -1,0 +1,45 @@
+.moves{
+
+    header{
+        border: 1px black solid;
+        display: flex;
+        align-items: center;
+        .fa-s{
+            margin-inline-end: 10px;
+           &::before{
+            content: '\e528';
+           }
+        }
+    }
+
+
+
+  
+    .move{
+        // width: 50%;
+        border-bottom: 1px rgb(141, 141, 141) solid;
+        >*{
+            display: flex;
+            align-items: center;
+            line-height: 1.5em;
+            :nth-child(2){
+                position: absolute;
+                margin-inline-start: 25%;
+            }
+        }
+        .fa-b{
+            &::before{
+                content: '\f15a';
+            }
+        }
+        a{
+            border-bottom: 1px rgb(141, 141, 141) solid;
+        }
+
+        margin-bottom: 10px;
+
+        .status{
+            color: rgb(63, 121, 80);
+        }
+    }
+}
