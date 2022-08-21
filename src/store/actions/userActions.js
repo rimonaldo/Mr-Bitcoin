@@ -12,12 +12,11 @@ export function setLoggedUser(name) {
   };
 }
 
-export function saveUser(newUser) {
+export function saveUser(userToUpadte) {
   return async (dispatch) => {
     try {
-      // const user = await userService.signup(name);
-      // dispatch({ type: "SET_LOGGED_USER", user });
-      // return user
+      dispatch({ type: "SAVE_USER", userToUpadte });
+      userService.saveUser(userToUpadte)
     } catch (err) {
       console.log(err);
     }

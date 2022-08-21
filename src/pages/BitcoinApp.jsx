@@ -4,6 +4,7 @@ import { HomePage } from "./HomePage";
 import { Header } from "../cmps/Header";
 import { ContactPage } from "./ContactPage";
 import { ContactDetailsPage } from "./ContactDetailsPage";
+import { setLoggedUser } from "../store/actions/userActions";
 import {
   HashRouter as Router,
   Route,
@@ -13,7 +14,7 @@ import {
 import { SignupPage } from "./SignupPage";
 import { ContactEdit } from "./ContactEdit";
 import { connect } from "react-redux";
-
+import { userService } from "../services/userService";
 const PrivateRoute = (props) => {
   const user = props.user;
   const isAdmin = true;
@@ -26,7 +27,11 @@ const AuthRoute = (props) => {
 };
 
 class _BitcoinApp extends Component {
-  componentDidMount() {}
+  async componentDidMount() {
+    const loggedUser = await this.props.user
+    console.log(loggedUser.name);
+    // this.props.setLoggedUser(loggedName)
+  }
 
   componentDidUpdate(prevProps, prevState) {
     if (prevProps.user !== this.props.user) {
@@ -35,6 +40,10 @@ class _BitcoinApp extends Component {
     }
   }
   
+
+  loggedUser(){
+    return JSON.parse(sessionStorage.getItem("loggedUser"))
+  }
   // HTML
   render() {
     return (
@@ -64,4 +73,6 @@ const mapStateToProps = (state, ownProps) => {
   };
 };
 
-export const BitcoinApp = connect(mapStateToProps)(_BitcoinApp);
+const mapDispatchToProps = { setLoggedUser };
+
+export const BitcoinApp = connect(mapStateToProps,mapDispatchToProps)(_BitcoinApp);

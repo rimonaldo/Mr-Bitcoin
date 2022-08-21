@@ -15,6 +15,7 @@ class _ContactPage extends React.Component {
   };
 
   async componentDidMount() {
+    console.log(this.props.user);
     const contacts = await contactService.getContacts();
     this.props.loadContacts();
   }
@@ -45,6 +46,7 @@ class _ContactPage extends React.Component {
 const mapStateToProps = (state) => {
   return {
     contacts: state.contactModule.contacts,
+    user: state.userModule.loggedUser,
   };
 };
 

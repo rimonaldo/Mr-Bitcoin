@@ -1,6 +1,5 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
-import { ContactEdit } from '../pages/ContactEdit'
 export function ContactPreview({contact}) {
   return (
     <Link to={`/contact/${contact._id}`} className='contact'>

@@ -3,7 +3,7 @@ import { contactService } from "../services/contactService";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { removeContact } from "../store/actions/contactActions";
-import { sendCoins } from "../store/actions/userActions";
+import { sendCoins,saveUser } from "../store/actions/userActions";
 export class _ContactDetailsPage extends React.Component {
   state = {
     contact: null,
@@ -12,6 +12,7 @@ export class _ContactDetailsPage extends React.Component {
 
   // SET CONTACT FROM URL PARAMS
   async componentDidMount() {
+    console.log(this.props);
     const contactId = this.props.match.params.id;
     const contact = await contactService.getContactById(contactId);
     this.setState({ contact });
@@ -35,6 +36,8 @@ export class _ContactDetailsPage extends React.Component {
     const {amount} = this.state
     console.log(amount);
     await this.props.sendCoins(amount);
+    const userToUpadte = this.props.user 
+    this.props.saveUser(userToUpadte)
   };
 
   handleChange({ target }) {
@@ -75,11 +78,12 @@ export class _ContactDetailsPage extends React.Component {
 
 // REDUX CONFIGORATION
 const mapStateToProps = (state) => {
-  console.log(state);
-  return {};
+  return {
+    user: state.userModule.loggedUser,
+  };
 };
 
-const mapDispatchToProps = { removeContact, sendCoins };
+const mapDispatchToProps = { removeContact, sendCoins, saveUser };
 
 export const ContactDetailsPage = connect(
   mapStateToProps,

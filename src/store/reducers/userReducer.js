@@ -1,7 +1,7 @@
 import { userService } from "../../services/userService";
 
-const INITIAL_STATE =  {
-  loggedUser: userService.getUser()|| null,
+const INITIAL_STATE = {
+  loggedUser: JSON.parse(sessionStorage.getItem("loggedUser")) || null,
 };
 
 export function userReducer(state = INITIAL_STATE, action) {
@@ -13,19 +13,20 @@ export function userReducer(state = INITIAL_STATE, action) {
         loggedUser: action.user,
       };
 
-      case 'SEND_COINS':
-        const { loggedUser } = state
-        console.log('loggedUser',loggedUser);
-        console.log('amount',action.amount);
-        return {
-            ...state,
-            loggedUser: { ...loggedUser, coins: loggedUser.coins - action.amount }
-        }
+    case "SEND_COINS":
+      const { loggedUser } = state;
+      return {
+        ...state,
+        loggedUser: { ...loggedUser, coins: loggedUser.coins - action.amount },
+      };
+
+    case "SAVE_USER":
+      return {
+        ...state,
+        loggedUser: action.userToUpadte
+      };
 
     default:
       return state;
   }
-
 }
-
-

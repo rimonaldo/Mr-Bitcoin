@@ -2,6 +2,7 @@ export const userService = {
   getUser,
   signup,
   addMove,
+  saveUser
 };
 
 const LOGGED_KEY = "loggedUser";
@@ -38,10 +39,12 @@ function signup(name) {
 function addMove(amount) {
   const loggedUser = getUser();
   loggedUser.coins -= amount;
-  _saveUser(loggedUser);
+  saveUser(loggedUser);
 }
 
-function _saveUser(user) {
+function saveUser(user) {
+
+  console.log('saving to session storage');
   sessionStorage.setItem(LOGGED_KEY, JSON.stringify(user));
 }
 

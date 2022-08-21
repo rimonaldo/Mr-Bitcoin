@@ -1,6 +1,8 @@
 import React from "react";
 import { Line } from "react-chartjs-2";
 import { Chart as chartjs } from "chart.js/auto";
+import zoomPlugin from "chartjs-plugin-zoom";
+
 export class BarChart extends React.Component {
   state = {
     chartData: {
@@ -13,27 +15,34 @@ export class BarChart extends React.Component {
       ],
     },
 
-
-    options : {
+    options: {
       responsive: true,
       elements: {
-        point:{
-            radius: 0
-        }
-    },
-      plugins: {
-        legend: {
-          display:false,
+        point: {
+          radius: 0,
         },
       },
-    }
-  };
 
+      plugins: {
+        zoom: {
+          zoom: {
+            wheel: {
+              enabled: true,
+            },
+            pinch: {
+              enabled: true,
+            },
+            mode: "xy",
+          },
+        },
+      },
+    },
+  };
 
   componentDidMount() {
     this.setState({ chartData: this.props.chartData });
   }
-  
+
   componentDidUpdate(prevProps, prevState) {
     if (prevProps.chartData !== this.props.chartData) {
       this.setState({ chartData: this.props.chartData });
@@ -51,10 +60,10 @@ export class BarChart extends React.Component {
   };
 
   render() {
-    const { chartData, options,legend } = this.state;
+    const { chartData, options, legend } = this.state;
     return (
       <section>
-          <Line data={ chartData } legend={legend} options={options} />
+          <Line data={chartData} legend={legend} options={options} />
       </section>
     );
   }

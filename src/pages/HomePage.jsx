@@ -48,9 +48,13 @@ export class HomePage extends React.Component {
       currDay = new Date(day.x * 1000);
       currDay = currDay.getMonth()+1 + "." + currDay.getDate();
       chartData.labels.push(currDay);
-      chartData.datasets[0].data.push(day.y);
+      chartData.datasets[0].data.push(day.y/1000);
     });
     return chartData;
+  }
+
+  setChartDate(){
+
   }
 
   render() {
