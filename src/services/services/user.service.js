@@ -1,7 +1,7 @@
-
 import Axios from 'axios'
-import { httpService } from './http.service'
+import { httpService } from '../http.service'
 const axios = Axios.create({ withCredentials: true })
+
 export const userService = {
   login,
   signup,
@@ -11,93 +11,7 @@ export const userService = {
   getLoggedinUser,
   getUsers,
   getById,
-  getLoggedUser,
-};
-
-const LOGGED_KEY = "loggedUser";
-
-const gUser = {
-  _id: 101,
-  name: "Rimon Sade",
-  email: "ochoahyde@renovize.com",
-  phone: "+1 (968) 593-3824",
-  coins: 100,
-};
-
-function getLoggedUser() {
-  const user =  JSON.parse(sessionStorage.getItem(LOGGED_KEY)) || gUser;
-  return new Promise((resolve, reject) =>{
-    user ? resolve(user) : reject('no user is logged')
-  })
 }
-
-
-async function signup(username) {
-
-
-  console.log(username, 'is logged');
-
-  const newUser = {
-    _id: _makeId(),
-    name: username,
-    email: `${username}@renovize.com`,
-    phone: "+1 (968) 593-3824",
-    coins: 100,
-  };
-  // sessionStorage.setItem(LOGGED_KEY, JSON.stringify(newUser));
-  // return newUser;
-  let signupInfo = {username, password:'123'}
-  const user = await httpService.post('auth/signup', signupInfo)
-  return _saveLocalUser(user)
-}
-
-async function addMove(amount) {
-  const loggedUser = await getLoggedUser();
-  const move = {from:loggedUser.name, at:Date.now(), amount}
-  let moves = loggedUser.moves
-
-  console.log(moves);
-  if (!moves || !moves.length) moves = []
-  console.log(moves);
-  moves.push(move)
-  console.log(moves);
-  // saveUser(loggedUser)
-}
-
-function saveUser(user) {
-
-  console.log('saving to session storage');
-  sessionStorage.setItem(LOGGED_KEY, JSON.stringify(user));
-}
-
-function _makeId(length = 7) {
-  var text = "";
-  var possible =
-    "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-  for (var i = 0; i < length; i++) {
-    text += possible.charAt(Math.floor(Math.random() * possible.length));
-  }
-  return text;
-}
-
-
-
-
-
-
-
-
-
-// export const userService = {
-//   login,
-//   signup,
-//   logout,
-//   removeUser,
-//   updateUser,
-//   getLoggedinUser,
-//   getUsers,
-//   getById,
-// }
 
 const STORAGE_KEY = 'user'
 
@@ -117,7 +31,11 @@ async function login(credentials) {
   
 }
 
-
+async function signup(signupInfo) {
+  console.log('signupInfo',signupInfo);
+  const user = await httpService.post('auth/signup', signupInfo)
+  return _saveLocalUser(user)
+}
 async function logout() {
   console.log('login out');
   sessionStorage.removeItem(STORAGE_KEY)

@@ -1,15 +1,17 @@
 .moves{
 
     header{
-        border: 1px black solid;
         display: flex;
         align-items: center;
+        padding: 1.3em;
         .fa-s{
             margin-inline-end: 10px;
            &::before{
             content: '\e528';
            }
         }
+        margin-bottom: 1em;
+
     }
 
 
@@ -30,6 +32,9 @@
         .fa-b{
             &::before{
                 content: '\f15a';
+                font-size: 14px;
+                margin-inline-end: 2px;
+                // color: black;
             }
         }
         a{
@@ -39,7 +44,12 @@
         margin-bottom: 10px;
 
         .status{
-            color: rgb(63, 121, 80);
+            color: rgb(86, 158, 107);
+        }
+
+        .at{
+            color: rgb(146, 146, 146);
+            font-size: 12px;
         }
     }
 }

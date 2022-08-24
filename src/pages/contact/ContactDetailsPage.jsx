@@ -3,11 +3,13 @@ import { contactService } from "../../services/contactService";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { removeContact } from "../../store/actions/contactActions";
-import { sendCoins,saveUser } from "../../store/actions/userActions";
+import { sendCoins, saveUser } from "../../store/actions/userActions";
+import { Moves } from "../../cmps/Moves";
+
 export class _ContactDetailsPage extends React.Component {
   state = {
     contact: null,
-    amount:0
+    amount: 0,
   };
 
   // SET CONTACT FROM URL PARAMS
@@ -31,12 +33,12 @@ export class _ContactDetailsPage extends React.Component {
   };
 
   onSendCoins = async (ev) => {
-    ev.preventDefault()
-    const {amount} = this.state
-    const to = this.state.contact
-    await this.props.sendCoins(amount,to);
-    const userToUpadte = this.props.user 
-    this.props.saveUser(userToUpadte)
+    ev.preventDefault();
+    const { amount } = this.state;
+    const to = this.state.contact;
+    await this.props.sendCoins(amount, to);
+    const userToUpadte = this.props.user;
+    this.props.saveUser(userToUpadte);
   };
 
   handleChange({ target }) {
@@ -45,12 +47,22 @@ export class _ContactDetailsPage extends React.Component {
     this.setState((prevState) => ({ [field]: value }));
   }
 
-
-  signup = () =>{
+  signup = () => {
     this.props.history.push("/signup");
-  }
+  };
+
+  movesToContact(){
+    const { contact } = this.state;
+    const { user } = this.props;
+    let moves = user.moves
+    return moves.filter(move =>{
+      return move.to._id === contact._id
+    })
+  };
+
   render() {
     const { contact } = this.state;
+    const {rate} = this.props
     if (!contact) return <div>loading...</div>;
     return (
       <section className="contact-details container">
@@ -60,15 +72,26 @@ export class _ContactDetailsPage extends React.Component {
             <span>Edit</span>
           </Link>
         </header>
-
-        <div className="avatar"></div>
+        <div className="info">
+          <div className="avatar"></div>
+          <div className="name">{contact.name}</div>
+        </div>
 
         <form className="send-coins">
-          <input type="text" name='amount' onChange={(ev)=> this.handleChange(ev)} />
-          <button onClick={(ev) => this.onSendCoins(ev)}>SEND</button>
-          <button onClick={this.removeContact}>Delete</button>
-          <button onClick={this.signup}>signup</button>
+          <input
+            type="text"
+            name="amount"
+            onChange={(ev) => this.handleChange(ev)}
+          />
+          <button onClick={(ev) => this.onSendCoins(ev)}>Transfer</button>
         </form>
+        {/* <button onClick={this.removeContact}>Delete</button> */}
+        {/* <button onClick={this.signup}>signup</button> */}
+
+        <div className="moves full">
+          {/* <button onClick={this.movesToContact}>moves</button> */}
+          <Moves moves={this.movesToContact()} rate={rate} />
+        </div>
       </section>
     );
   }
@@ -78,6 +101,8 @@ export class _ContactDetailsPage extends React.Component {
 const mapStateToProps = (state) => {
   return {
     user: state.userModule.loggedUser,
+    contacts: state.contactModule.contacts,
+    rate:state.tokenModule.rate
   };
 };
 

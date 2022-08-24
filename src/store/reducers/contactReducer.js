@@ -1,5 +1,5 @@
 const INITIAL_STATE = {
-  contacts: null,
+  contacts: JSON.parse(localStorage.getItem('contacts_db')) || null,
   filterBy:null,
 };
 

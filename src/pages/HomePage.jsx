@@ -3,7 +3,9 @@ import { userService } from "../services/userService";
 import { bitcoinService } from "../services/bitcoinService";
 import { BarChart } from "../cmps/LineChart.jsx";
 import { Moves } from "../cmps/Moves";
-export class HomePage extends React.Component {
+import { setRate } from "../store/actions/tokenActions";
+import { connect } from "react-redux";
+export class _HomePage extends React.Component {
   state = {
     user: {},
     rate: "",
@@ -14,7 +16,9 @@ export class HomePage extends React.Component {
           label: "user gain",
           data: [500, 100],
         },
+        
       ],
+      
     },
   };
 
@@ -24,6 +28,9 @@ export class HomePage extends React.Component {
     const rate =
       chartData.datasets[0].data[chartData.datasets[0].data.length - 1];
     this.setState({ rate, user, chartData });
+    this.props.setRate(rate)
+
+    
   }
 
   componentWillUnmount() {}
@@ -93,9 +100,27 @@ export class HomePage extends React.Component {
             </div>
           </div>
           {chartData ? <BarChart chartData={chartData} /> : ""}
+
+          {/* <ChartHost></ChartHost> */}
         </section>
-        <Moves amount={5} rate={rate} />
+        <Moves moves={user.moves} amount={5} rate={rate}  />
       </section>
     );
   }
 }
+
+
+// REDUX CONFIGORATION
+const mapStateToProps = (state) => {
+  return {
+    user: state.userModule.loggedUser,
+    contacts: state.contactModule.contacts,
+  };
+};
+
+const mapDispatchToProps = { setRate};
+
+export const HomePage = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(_HomePage);

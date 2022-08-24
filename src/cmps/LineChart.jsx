@@ -1,8 +1,9 @@
 import React from "react";
 import { Line } from "react-chartjs-2";
-import { Chart as chartjs } from "chart.js/auto";
+import Chart from "chart.js/auto";
 import zoomPlugin from "chartjs-plugin-zoom";
 
+Chart.register(zoomPlugin);
 export class BarChart extends React.Component {
   state = {
     chartData: {
@@ -19,13 +20,24 @@ export class BarChart extends React.Component {
       responsive: true,
       elements: {
         point: {
-          radius: 0,
+          radius: 1.5,
+          color:'black'
         },
       },
-
       plugins: {
+        legend: {
+          display: false,
+        },
         zoom: {
+          pan: {
+            enabled: true,
+            mode: "xy",
+          },
           zoom: {
+            limits: {
+              y: {min: 'original', max: 'original'},
+              y2: {min: 'original', max:'original'}
+            },
             wheel: {
               enabled: true,
             },
@@ -63,7 +75,7 @@ export class BarChart extends React.Component {
     const { chartData, options, legend } = this.state;
     return (
       <section>
-          <Line data={chartData} legend={legend} options={options} />
+        <Line data={chartData} options={options} />
       </section>
     );
   }

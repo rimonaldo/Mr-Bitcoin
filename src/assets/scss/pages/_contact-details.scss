@@ -1,12 +1,57 @@
-.contact-details{
-    header{
-        background-color: rgba(0, 0, 0, 0.5);
+.contact-details {
+  header {
+    background-color: rgba(0, 0, 0, 0.5);
+    border: none;
+    width: 100%;
+    padding: 0 $layout-padding;
+    height: 2.7em;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 2rem;
+  }
+
+  .info {
+    margin-bottom: 2rem;
+    .avatar{
+        width: 130px;
+        height: 130px;
+        margin: 0 auto;
+        margin-bottom: 1em;
+    }
+    .name{
+        font-size: 2em;
+        text-align: center;
+        color: $clr1;
+    }
+  }
+  form {
+    display: flex;
+    width: 90%;
+    margin: 0 auto;
+    margin-bottom: 2em;
+    input {
+        background-color: $clr2;
         border: none;
         width: 100%;
-        padding:0 $layout-padding;
-        height: 2.7em;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
+        margin-inline-end: 1em;
+        border-radius: 5px;
     }
+    
+    button{
+        background-color: $clr1;
+        border: none;
+        border-radius: 5px;
+        line-height: 1.8em;
+        padding: 0 10px;
+        color: rgb(233, 233, 233);
+        font-size: 1em;
+    }
+  }
+
+  .moves{
+    header{
+        justify-content: flex-start;
+    }
+  }
 }

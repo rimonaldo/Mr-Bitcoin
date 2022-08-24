@@ -18,7 +18,6 @@ export class ContactList extends React.Component {
             <button className="fa-s"></button>
           </Link>
         </div>
-        list
       {contacts.map(contact => 
         <ContactPreview key={contact._id} contact={contact} />
       )}

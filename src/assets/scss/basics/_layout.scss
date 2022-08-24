@@ -3,10 +3,18 @@
     grid-column: 1 / -1;
 }
 
+
+canvas{
+    max-height: 800px;
+    max-width: 1700px;
+    margin: 0 auto;
+}
 .container {
     display: grid;
     grid-template-columns: $layout-padding 1fr $layout-padding;
-
+    // max-height: 400px;
+    // max-width: 700px;
+    margin: 0 auto;
     > * {
         grid-column: 2;
     }

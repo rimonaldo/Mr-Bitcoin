@@ -29,8 +29,6 @@ const AuthRoute = (props) => {
 class _BitcoinApp extends Component {
   async componentDidMount() {
     const loggedUser = await this.props.user
-    console.log(loggedUser.name);
-    // this.props.setLoggedUser(loggedName)
   }
 
   componentDidUpdate(prevProps, prevState) {

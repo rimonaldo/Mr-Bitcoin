@@ -1,11 +1,12 @@
 import { Component, createRef } from "react";
 import { contactService } from "../../services/contactService";
+import { Link } from "react-router-dom";
 export class ContactEdit extends Component {
   state = {
     contact: null,
   };
 
-  inputRef= createRef()
+  inputRef = createRef();
 
   async componentDidMount() {
     const contactId = this.props.match.params.id;
@@ -31,7 +32,7 @@ export class ContactEdit extends Component {
     ev.preventDefault();
     let contact = this.state.contact;
     contact = await contactService.saveContact(contact);
-    this.goBack()
+    this.goBack();
   };
 
   goBack = () => {
@@ -42,8 +43,12 @@ export class ContactEdit extends Component {
     const { contact } = this.state;
     if (!contact) return <div>Loading...</div>;
     return (
-      <section className="contact-edit">
-        <h1>{contact._id ? "Edit" : "Add"}</h1>
+      <section className="contact-edit container">
+        <header className="full main">
+          <Link to={`/contact/${contact._id}`}>
+            <span>Back</span>
+          </Link>
+        </header>
 
         <form>
           <input
