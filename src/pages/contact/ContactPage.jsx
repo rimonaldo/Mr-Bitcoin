@@ -2,6 +2,7 @@ import React from "react";
 import { contactService } from "../../services/contactService";
 import { ContactList } from "../../cmps/ContactList";
 import { connect } from "react-redux";
+import { userService } from "../../services/userService";
 import {
   loadContacts,
   removeContact,
@@ -15,9 +16,10 @@ class _ContactPage extends React.Component {
   };
 
   async componentDidMount() {
-    console.log(this.props.user);
+    await  userService.getUsers()
     const contacts = await contactService.getContacts();
     this.props.loadContacts();
+
   }
 
   componentWillUnmount() {}

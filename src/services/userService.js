@@ -8,10 +8,9 @@ export const userService = {
   logout,
   removeUser,
   updateUser,
-  getLoggedinUser,
   getUsers,
   getById,
-  getLoggedUser,
+  getUser,
 };
 
 const LOGGED_KEY = "loggedUser";
@@ -24,7 +23,7 @@ const gUser = {
   coins: 100,
 };
 
-function getLoggedUser() {
+function getUser() {
   const user =  JSON.parse(sessionStorage.getItem(LOGGED_KEY)) || gUser;
   return new Promise((resolve, reject) =>{
     user ? resolve(user) : reject('no user is logged')
@@ -52,8 +51,8 @@ async function signup(username) {
 }
 
 async function addMove(amount) {
-  const loggedUser = await getLoggedUser();
-  const move = {from:loggedUser.name, at:Date.now(), amount}
+  const loggedUser = await getUser();
+  const move = {from:loggedUser.username, at:Date.now(), amount}
   let moves = loggedUser.moves
 
   console.log(moves);
@@ -99,7 +98,7 @@ function _makeId(length = 7) {
 //   getById,
 // }
 
-const STORAGE_KEY = 'user'
+const STORAGE_KEY = 'loggedUser'
 
 async function getUsers() {
   console.log('getting users');
@@ -116,7 +115,6 @@ async function login(credentials) {
   if (user) return _saveLocalUser(user)
   
 }
-
 
 async function logout() {
   console.log('login out');

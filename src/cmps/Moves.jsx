@@ -20,7 +20,8 @@ export const Moves = (props) => {
   }
 
 
-  if (!props.moves)
+  if (!props.moves.length
+    )
     return (
       <div className="container">
         <span>No moves to display</span>

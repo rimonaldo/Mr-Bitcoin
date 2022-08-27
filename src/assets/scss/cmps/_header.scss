@@ -6,12 +6,28 @@
     align-items: center;
     padding: 0 $layout-padding ;
 
+    a{
+        font-size: 1.3em;
+    }
+
+    .links{
+        display: flex;
+        justify-content: space-between;
+        // border-top: 1px $clr1 solid;
+        // border-left: 1px $clr1 solid;
+        width: 10em;
+    }
     .contacts-link{
         &::before{
             content: '\f0c0';
             margin-inline-end: 5px;
             cursor: pointer;
-            font-size: 1.3em;
+        }
+    }
+
+    .miner-hub-link{
+        &::before{
+            content: "\f85e";
         }
     }
 }

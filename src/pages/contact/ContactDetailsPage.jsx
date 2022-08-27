@@ -55,6 +55,7 @@ export class _ContactDetailsPage extends React.Component {
     const { contact } = this.state;
     const { user } = this.props;
     let moves = user.moves
+    if(!moves) return []
     return moves.filter(move =>{
       return move.to._id === contact._id
     })

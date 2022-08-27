@@ -5,6 +5,7 @@ import { Header } from "../cmps/Header";
 import { ContactPage } from "./contact/ContactPage";
 import { ContactDetailsPage } from "./contact/ContactDetailsPage";
 import { setLoggedUser } from "../store/actions/userActions";
+import { MinerHub } from "./MinerHubPage";
 import {
   HashRouter as Router,
   Route,
@@ -57,6 +58,7 @@ class _BitcoinApp extends Component {
               component={SignupPage}
               onSignup={this.onSignup}
             />
+            <AuthRoute path="/miner" component={MinerHub} user={this.props.user} />
             <AuthRoute path="/" component={HomePage} user={this.props.user} />
           </Switch>
         </div>

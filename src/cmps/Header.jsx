@@ -17,8 +17,11 @@ export class Header extends React.Component {
     const {setPage} = this.props
     return (
       <section className="header full" >
-        <NavLink exact to='/'><div className="logo">Mr.Bitcoin</div></NavLink>
+        <NavLink exact to='/'><div className="logo">Mr.popCoin</div></NavLink>
+       <div className="links">
+       <NavLink to='/miner'><div className="miner-hub-link fa-s"></div></NavLink>
         <NavLink to='/contact'><div className="contacts-link fa-s"></div></NavLink>
+       </div>
       </section>
     );
   }

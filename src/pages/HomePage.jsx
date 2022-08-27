@@ -78,7 +78,7 @@ export class _HomePage extends React.Component {
     return (
       <section>
         <section className="home container">
-          <header>Hi, {user.name}</header>
+          <header>Hi, {user.username}</header>
           <div className="balance-container">
             <div className="balance">
               <div className="b-header">CURRENT BALANCE</div>
@@ -100,10 +100,8 @@ export class _HomePage extends React.Component {
             </div>
           </div>
           {chartData ? <BarChart chartData={chartData} /> : ""}
-
-          {/* <ChartHost></ChartHost> */}
         </section>
-        <Moves moves={user.moves} amount={5} rate={rate}  />
+        {user.moves ? <Moves moves={user.moves} amount={5} rate={rate}  /> : ''}
       </section>
     );
   }
@@ -118,7 +116,7 @@ const mapStateToProps = (state) => {
   };
 };
 
-const mapDispatchToProps = { setRate};
+const mapDispatchToProps = { setRate };
 
 export const HomePage = connect(
   mapStateToProps,
