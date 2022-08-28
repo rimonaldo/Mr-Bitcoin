@@ -1,63 +1,54 @@
-import React from "react";
-import { contactService } from "../../services/contactService";
-import { ContactList } from "../../cmps/ContactList";
-import { connect } from "react-redux";
-import { userService } from "../../services/userService";
-import {
-  loadContacts,
-  removeContact,
-  setFilterBy,
-} from "../../store/actions/contactActions";
-import { ContactFilter } from "../../cmps/ContactFilter";
+import React from "react"
+import { contactService } from "../../services/contactService"
+import { ContactList } from "../../cmps/ContactList"
+import { connect } from "react-redux"
+import { userService } from "../../services/userService"
+import { loadContacts, removeContact, setFilterBy } from "../../store/actions/contactActions"
+import { ContactFilter } from "../../cmps/ContactFilter"
+
 class _ContactPage extends React.Component {
-  state = {
-    filterBy: null,
-    txt: null,
-  };
+   state = {
+      filterBy: null,
+      txt: null,
+   }
 
-  async componentDidMount() {
-    await  userService.getUsers()
-    const contacts = await contactService.getContacts();
-    this.props.loadContacts();
+   async componentDidMount() {
+      await userService.getUsers()
+      const contacts = await contactService.getContacts()
+      this.props.loadContacts()
+   }
 
-  }
+   componentWillUnmount() {}
 
-  componentWillUnmount() {}
+   onChangeFilter = filterBy => {
+      this.props.setFilterBy(filterBy)
+      this.props.loadContacts()
+   }
 
-
-
-  onChangeFilter = (filterBy) => {
-    this.props.setFilterBy(filterBy)
-    this.props.loadContacts()
-  };
-
-  render() {
-    const { contacts, setPage } = this.props;
-    if (!contacts) return <div>loading...</div>;
-    return (
-      <section className="container">
-        <div className="full">
-        <ContactFilter  onChangeFilter={this.onChangeFilter}/>
-        </div>
-        {contacts.length ? <ContactList contacts={contacts} /> : ""}
-      </section>
-    );
-  }
+   render() {
+      const { contacts, setPage } = this.props
+      if (!contacts) return <div>loading...</div>
+      return (
+         <section className="container">
+            <div className="full">
+               <ContactFilter onChangeFilter={this.onChangeFilter} />
+            </div>
+            {contacts.length ? <ContactList contacts={contacts} /> : ""}
+         </section>
+      )
+   }
 }
 
-const mapStateToProps = (state) => {
-  return {
-    contacts: state.contactModule.contacts,
-    user: state.userModule.loggedUser,
-  };
-};
+const mapStateToProps = state => {
+   return {
+      contacts: state.contactModule.contacts,
+      user: state.userModule.loggedUser,
+   }
+}
 
 const mapDispatchToProps = {
-  loadContacts,
-  setFilterBy,
-};
+   loadContacts,
+   setFilterBy,
+}
 
-export const ContactPage = connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(_ContactPage);
+export const ContactPage = connect(mapStateToProps, mapDispatchToProps)(_ContactPage)

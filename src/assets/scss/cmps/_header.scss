@@ -1,33 +1,41 @@
-.header{
-    justify-content: space-between;
-    z-index: 1;
-    height: 50px;
-    display: flex;
-    align-items: center;
-    padding: 0 $layout-padding ;
+.header {
+   justify-content: space-between;
+   z-index: 1;
+   height: 50px;
+   display: flex;
+   align-items: center;
+   padding: 0 $layout-padding;
 
-    a{
-        font-size: 1.3em;
-    }
+   a {
+      font-size: 1.3em;
+   }
 
-    .links{
-        display: flex;
-        justify-content: space-between;
-        // border-top: 1px $clr1 solid;
-        // border-left: 1px $clr1 solid;
-        width: 10em;
-    }
-    .contacts-link{
-        &::before{
-            content: '\f0c0';
-            margin-inline-end: 5px;
-            cursor: pointer;
-        }
-    }
+   .links {
+      display: flex;
+      justify-content: space-between;
+      // border-top: 1px $clr1 solid;
+      // border-left: 1px $clr1 solid;
+      width: 10em;
+   }
+   .contacts-link {
+      &::before {
+         content: '\f0c0';
+         margin-inline-end: 5px;
+         cursor: pointer;
+      }
+   }
 
-    .miner-hub-link{
-        &::before{
-            content: "\f85e";
-        }
-    }
+   .miner-hub-link {
+      &::before {
+         content: '\f85e';
+      }
+   }
+
+   .key-menu {
+      font-size: 1.3em;
+      position: relative;
+      &::before {
+         content: '\f084';
+      }
+   }
 }

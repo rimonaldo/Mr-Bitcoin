@@ -1,0 +1,33 @@
+.key-box {
+   position: absolute;
+   left: -200px;
+   bottom: 0;
+   display: flex;
+   .key {
+      border: 1px black solid;
+      font-size: 16px;
+      background-color: rgba(255, 255, 255, 0.685);
+      color: black;
+      border: none;
+      border-radius: 3px;
+      margin-inline-end: 7.5px;
+      font-family: sans-serif;
+   }
+
+   .copy {
+      font-size: 16px;
+      color: $clr1;
+      &::before {
+         content: '\f0c5';
+      }
+   }
+}
+
+.wraper {
+   position: absolute;
+   bottom: -35px;
+   display: flex;
+   flex-direction: column;
+}
+
+
