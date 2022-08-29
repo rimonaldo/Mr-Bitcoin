@@ -23,14 +23,16 @@ export function userReducer(state = INITIAL_STATE, action) {
          const { loggedUser } = state
          const { username, walletAddress } = loggedUser
          const move = {
+            status:'pending',
             from: { username, walletAddress },
             at: Date.now(),
             amount: action.amount,
+            _id:action._id,
             to: { name: action.to.name, walletAddress: 'address', _id: action.to._id },
          }
          let moves = loggedUser.moves
          if (!moves || !moves.length) moves = []
-         moves.push(move)
+         moves.unshift(move)
          return {
             ...state,
             loggedUser: {

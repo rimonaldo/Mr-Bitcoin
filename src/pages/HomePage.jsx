@@ -27,12 +27,10 @@ export class _HomePage extends React.Component {
       const chartData = await this.getMarketData()
       const lastDay = chartData.datasets[0].data.length - 1
       const rate = chartData.datasets[0].data[lastDay]
+      this.props.setRate(rate)
+      this.props.setBalance(user.privateKey)
       
       this.setState({ rate, user, chartData })
-      this.props.setRate(rate)
-      console.log(this.props);
-      this.setBalance(user)
-     
    }
 
    async getMarketData() {
@@ -71,7 +69,7 @@ export class _HomePage extends React.Component {
    componentWillUnmount() {}
 
    setBalance({privateKey}){
-      this.props.setBalance(privateKey)
+    
    }
 
    render() {

@@ -19,30 +19,29 @@ export const userService = {
    getBalance,
 }
 
-async function addTranaction(amount, toAddress) {
-   const user = await getUser()
-   const { walletAddress, privateKey } = user
-   const tx = {
-      fromAddress: walletAddress,
-      toAddress: 'address',
-      amount: +amount,
-      privateKey,
-   }
-   console.log(tx)
-   return await httpService.post('popCoin/transaction', tx)
-}
-
-async function getBalance(privateKey) {
-   const balance = await httpService.get( `popCoin/wallet/${privateKey}` )
-   return balance
-}
-
 const gUser = {
    _id: 101,
    name: 'Rimon Sade',
    email: 'ochoahyde@renovize.com',
    phone: '+1 (968) 593-3824',
    coins: 100,
+}
+
+async function addTranaction(amount, toAddress) {
+   const { walletAddress, privateKey } = await getUser()
+   const tx = {
+      fromAddress: walletAddress,
+      toAddress: toAddress.walletAddress || 'address',
+      amount: +amount,
+      privateKey,
+   }
+   return await httpService.post('popCoin/transaction', tx)
+}
+
+async function getBalance(privateKey) {
+   const balance = await httpService.get(`popCoin/wallet/${privateKey}`)
+   const signupBonus = 1000
+   return balance + signupBonus
 }
 
 function getUser() {
@@ -102,6 +101,7 @@ async function getById(userId) {
 }
 
 async function login(credentials) {
+   console.log('login with', credentials);
    const user = await httpService.post('auth/login', credentials)
    if (user) return _saveLocalUser(user)
 }

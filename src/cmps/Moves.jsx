@@ -3,18 +3,32 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 export const Moves = props => {
    const { amount, rate } = props
-   const { loggedUser } = useSelector(state => state.userModule)
 
    function getMovesToDisplay() {
       return amount ? props.moves.slice(0, amount) : props.moves
    }
 
    const formateTime = time => {
-      time = Date(time)
-      let timeArr = time.split(' ')
-      let date = timeArr.splice(1, 3).join(' ')
-      let hour = timeArr[1].split(':').splice(0, 2).join(':')
-      return `${date} | ${hour}`
+      const monthNames = [
+         'Jan',
+         'Feb',
+         'March',
+         'April',
+         'May',
+         'June',
+         'July',
+         'Aug',
+         'Sept',
+         'Oct',
+         'Nov',
+         'Dec',
+      ]
+      const date = new Date(time)
+      const moveDate =` ${monthNames[date.getMonth()]} ${date.getDate()} , ${date.getFullYear()}`
+      const mins = date.getMinutes()+''
+      const moveMins = mins.length < 2 ? '0'+date.getMinutes() : date.getMinutes()  
+      const hour =` ${date.getHours()}:${moveMins}`
+      return `${moveDate} | ${hour}`
    }
 
    if (!props.moves.length)
@@ -23,6 +37,7 @@ export const Moves = props => {
             <span>No moves to display</span>
          </div>
       )
+
    return (
       <section className="container moves">
          <header className="main full">
@@ -46,7 +61,7 @@ export const Moves = props => {
 
                   <div className="status-box">
                      <span>STATUS : </span>
-                     <span className="status">APROVED</span>
+                     <span className={move.status||'approved'}>{move.status ?move.status.toUpperCase() : 'APPROVED'}</span>
                   </div>
                   <div className="at">{formateTime(move.at)}</div>
                </div>

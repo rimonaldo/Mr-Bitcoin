@@ -36,7 +36,7 @@ export class _ContactDetailsPage extends React.Component {
       const to = this.state.contact
       await this.props.sendCoins(amount, to)
       const userToUpadte = this.props.user
-      // this.props.saveUser(userToUpadte)
+      this.props.saveUser(userToUpadte)
    }
 
    handleChange({ target }) {
@@ -80,9 +80,7 @@ export class _ContactDetailsPage extends React.Component {
                <input type="text" name="amount" onChange={ev => this.handleChange(ev)} />
                <button onClick={ev => this.onSendCoins(ev)}>Transfer</button>
             </form>
-            <button onClick={this.signup}>signup</button>
             <div className="moves full">
-               {/* <button onClick={this.movesToContact}>moves</button> */}
                <Moves moves={this.movesToContact()} rate={rate} />
             </div>
          </section>

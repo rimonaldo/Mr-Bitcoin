@@ -10,6 +10,24 @@
       font-size: 1.3em;
    }
 
+   .logo{
+      width: 1.1em;
+      height: 1.1em;
+      background-position: center;
+      background-size: cover;
+      margin-inline-end: 2em;
+   }
+
+   .login{
+      &::before{
+         content: '\f007';
+      }
+   }
+
+   .right{
+      display: flex;
+   }
+
    .links {
       display: flex;
       justify-content: space-between;

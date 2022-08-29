@@ -29,7 +29,7 @@ class _BitcoinApp extends Component {
 
    componentDidUpdate(prevProps, prevState) {
       if (prevProps.user !== this.props.user) {
-         console.log('changed user', this.props.user)
+         console.log('changed user', this.props.user.username)
       }
    }
 

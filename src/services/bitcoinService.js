@@ -1,5 +1,6 @@
 import axios from "axios"
 import { httpService } from "./http.service"
+import { userService } from "./userService"
 export const bitcoinService = {
    getRate,
    getMarketPrice,
@@ -21,9 +22,14 @@ async function getPending() {
    return await httpService.get("miner/pending")
 }
 
-async function minePending() {
+async function minePending(rewardAddress) {
    console.log("minig")
-   return await httpService.post("miner/mine")
+   const user = await userService.getUser()
+   const blocks =  await httpService.post("miner/mine",rewardAddress)
+   if(!blocks) return false
+   user.moves.map(move=>move.status = 'approved')
+   await userService.updateUser(user)
+   return blocks
 }
 
 // market data --> cacheing mechanism

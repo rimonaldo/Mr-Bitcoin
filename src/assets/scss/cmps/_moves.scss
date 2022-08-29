@@ -43,8 +43,11 @@
 
         margin-bottom: 10px;
 
-        .status{
+        .approved{
             color: rgb(86, 158, 107);
+        }
+        .pending{
+            color: rgb(120, 166, 204);
         }
 
         .at{

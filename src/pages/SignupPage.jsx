@@ -1,16 +1,17 @@
-import React, { Component } from "react"
-import { connect } from "react-redux"
-import { setLoggedUser } from "../store/actions/userActions"
+import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import { setLoggedUser } from '../store/actions/userActions'
 export class _SignupPage extends Component {
    state = {
-      username: "",
+      username: '',
+      password: '',
    }
    componentDidMount() {}
 
    // ON INPUT CHANGE SET USER NAME
    async handleChange({ target }) {
       const field = target.name
-      const value = target.type === "number" ? +target.value || "" : target.value
+      const value = target.type === 'number' ? +target.value || '' : target.value
       this.setState(prevState => ({
          [field]: value,
       }))
@@ -21,19 +22,35 @@ export class _SignupPage extends Component {
       const name = this.state.username
       if (!name) return
       const loggedUser = await this.props.setLoggedUser(name)
-      if (loggedUser) this.props.history.push("/")
+      if (loggedUser) this.props.history.push('/')
+   }
+
+   async onLogin() {
+      const{username,password}= this.state
+      console.log(username,password);
+      if (!username || !password) return
+      const loggedUser = await this.props.setLoggedUser(username,password)
+      if (loggedUser) this.props.history.push('/')
    }
 
    // HTML
    render() {
       return (
-         <div>
+         <div className="container">
             <div className="logo"></div>
             <span>Please enter your name:</span>
             <br />
-            <input type="text" onChange={ev => this.handleChange(ev)} name="username" />
+            <input placeholder="username" type="text" onChange={ev => this.handleChange(ev)} name="username" />
             <button className="button" onClick={() => this.onSignup()}>
-               Sign up
+               Signup
+            </button>
+            <div>or</div>
+            <span>Please enter existing username:</span>
+            <br />
+            <input placeholder="username" type="text" onChange={ev => this.handleChange(ev)} name="username" />
+            <input placeholder="password" type="text" onChange={ev => this.handleChange(ev)} name="password" />
+            <button className="button" onClick={() => this.onLogin()}>
+               Login
             </button>
          </div>
       )

@@ -1,0 +1,70 @@
+.miner-hub {
+   overflow-x: hidden;
+
+   header {
+      margin-top: 2em;
+      text-align: center;
+      font-size: 1.5em;
+      span {
+         color: $clr1;
+      }
+   }
+
+   .pendings {
+      margin-bottom: 1em;
+      // border: 1px black solid;
+      //   height: 30vh;
+      list-style: none;
+      .pending {
+         background-color: rgb(250, 250, 250);
+         color: rgb(33, 43, 160);
+         position: relative;
+         > * {
+            line-height: 1.65em;
+            display: flex;
+            justify-content: space-between;
+            padding: 0 25px 0 15px;
+         }
+         input {
+            font-size: 1em;
+         }
+      }
+   }
+
+   button {
+      width: 100%;
+      //   margin-bottom: 5vh;
+      background-color: $clr1;
+      border: none;
+      border-radius: 3px;
+      color: white;
+      line-height: 1.4em;
+   }
+
+   .blocks {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      .block {
+         background-color: rgb(250, 250, 250);
+         color: rgb(33, 43, 160);
+         margin-bottom: 1em;
+         position: relative;
+         .index {
+            color: $clr1;
+            margin-bottom: 1em;
+         }
+         > * {
+            margin-bottom: 0.1em;
+            line-height: 1.7em;
+            display: flex;
+            justify-content: space-between;
+            padding: 0 25px 0 15px;
+         }
+
+         input {
+            font-size: 1em;
+         }
+      }
+   }
+}

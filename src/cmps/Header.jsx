@@ -22,23 +22,32 @@ export class Header extends React.Component {
       const { setPage } = this.props
       return (
          <section className="header full">
-            <NavLink exact to="/">
-               <div className="logo">Mr.popCoin</div>
-            </NavLink>
+            <div className="right">
+               <NavLink exact to="/" title="home">
+                  <div
+                     className="logo"
+                     style={{
+                        backgroundImage:
+                           'url(https://www.clipartmax.com/png/full/4-44076_irish-clipart-gold-coin-gold-coins-st-patricks-day.png)',
+                     }}
+                  ></div>
+               </NavLink>
 
+               <NavLink title="swith user" exact to="/signup" className={'fa-s login'}></NavLink>
+            </div>
             <div className="links">
-               <NavLink to="/miner">
+               <NavLink to="/miner" title='miner-hub'>
                   <div className="miner-hub-link fa-s"></div>
                </NavLink>
 
-               <NavLink to="/contact">
+               <NavLink to="/contact" title='contacts'>
                   <div className="contacts-link fa-s"></div>
                </NavLink>
 
-               <div className="key-menu fa-s" onClick={this.keyIsShown}>
+               <div className="key-menu fa-s" title='private key' onClick={this.keyIsShown}>
                   {this.state.isKeyShown ? (
-                     <div className='wraper' onClick={ev => ev.stopPropagation()}>
-                        <PrivateKey />
+                     <div className="wraper" onClick={ev => ev.stopPropagation()}>
+                        <PrivateKey  />
                      </div>
                   ) : (
                      ''

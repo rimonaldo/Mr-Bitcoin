@@ -14,11 +14,13 @@
 @import "basics/animations";
 
 // Pages
+@import "pages/miner-hub";
 @import "pages/contact-edit";
 @import "pages/contact-details";
 @import "pages/home";
 
 // Components
+@import "cmps/block";
 @import "cmps/user-msg";
 @import "cmps/key";
 @import "cmps/send-coins";

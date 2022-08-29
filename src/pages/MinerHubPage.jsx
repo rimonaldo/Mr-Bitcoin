@@ -1,57 +1,71 @@
-import { useEffect } from "react"
-import { useSelector, useDispatch } from "react-redux"
-import { loadPending, minePending } from "../store/actions/tokenActions"
-import { useState } from "react"
+import { useEffect } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
+import { loadPending, minePending } from '../store/actions/tokenActions'
+import { useState } from 'react'
 export const MinerHub = props => {
    //   useDispatch
    const dispatch = useDispatch()
 
-   const { pending, block } = useSelector(state => state.tokenModule)
+   const { pending, blocks } = useSelector(state => state.tokenModule)
    useEffect(() => {
       dispatch(loadPending())
    }, [])
-
-   const [mineList, setMineList] = useState([])
-
-   useEffect(() => {
-      console.log(block)
-   }, [block])
-
-   //   const [pendingToMine, []] = useState([])
 
    function showPending() {
       return pending.length ? (
          <>
             {pending.map(tx => {
                return (
-                  <li key={tx._id} className="pending-tx">
-                     {tx.index} <input type="checkbox" name={tx._id} />
-                     {tx.signature}...
+                  <li key={tx._id} className="pending">
+                     <span>
+                        signature: <input onChange={ev => ev.stopPropagation()} type="text" value={tx.signature} />
+                     </span>
                   </li>
                )
             })}
          </>
       ) : (
-         ""
+         ''
       )
    }
 
-   function showMineList() {
-      console.log("change")
-      return mineList.length ? (
+   function showBlocks() {
+      return blocks.length ? (
          <>
-            {mineList.map(tx => {
+            {blocks.map((block, index) => {
                return (
-                  <li key={tx._id} className="mine-tx">
-                     {tx._id.substring(0, 12)}...
+                  <li key={block.hash} className="block" onChange={ev => ev.stopPropagation()}>
+                     <span className="index">
+                        index : <span>{index}</span>
+                     </span>
+                     <div>
+                        prev hash:{' '}
+                        <input onChange={ev => ev.stopPropagation()} type="text" value={block.previousHash} />
+                     </div>
+                     <div>
+                        timestamp: <input onChange={ev => ev.stopPropagation()} type="text" value={block.timestamp} />
+                     </div>
+                     <div>
+                        nonce: <input onChange={ev => ev.stopPropagation()} type="text" value={block.nonce} />
+                     </div>
+                     <div>
+                        transactions:{' '}
+                        <input
+                           onChange={ev => ev.stopPropagation()}
+                           type="text"
+                           value={JSON.stringify(block.transactions)}
+                        />
+                     </div>
+                     <div>
+                        hash: <input onChange={ev => ev.stopPropagation()} type="text" value={block.hash} />
+                     </div>
                   </li>
                )
             })}
          </>
       ) : (
-         ""
+         ''
       )
-      // console.log(pending);
    }
 
    function onMine() {
@@ -59,14 +73,18 @@ export const MinerHub = props => {
    }
 
    return (
-      <section className="container miner-hub-page">
+      <section className="container miner-hub">
          <form className="pending-container">
             <label>
-               Pending:
-               <ul>{showPending()}</ul>
+              <header>PENDING : <span>{pending.length}</span></header>
+               <ul className="pendings">{showPending()}</ul>
             </label>
 
-            <button onClick={() => onMine()}>mine</button>
+            <footer>
+               <button onClick={() => onMine()}>mine</button>
+               <header>BLOCKS : <span>{blocks.length}</span></header>
+               <ul className="blocks">{showBlocks()}</ul>
+            </footer>
          </form>
       </section>
    )

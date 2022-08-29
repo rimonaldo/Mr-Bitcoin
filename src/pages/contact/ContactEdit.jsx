@@ -1,6 +1,6 @@
-import { Component, createRef } from "react"
-import { contactService } from "../../services/contactService"
-import { Link } from "react-router-dom"
+import { Component, createRef } from 'react'
+import { contactService } from '../../services/contactService'
+import { Link } from 'react-router-dom'
 export class ContactEdit extends Component {
    state = {
       contact: null,
@@ -21,7 +21,7 @@ export class ContactEdit extends Component {
 
    handleChange({ target }) {
       const field = target.name
-      const value = target.type === "number" ? +target.value || "" : target.value
+      const value = target.type === 'number' ? +target.value || '' : target.value
       this.setState(prevState => ({
          contact: { ...prevState.contact, [field]: value },
       }))
@@ -35,7 +35,7 @@ export class ContactEdit extends Component {
    }
 
    goBack = () => {
-      this.props.history.push("/contact")
+      this.props.history.push('/contact')
    }
 
    render() {
@@ -56,19 +56,31 @@ export class ContactEdit extends Component {
                   name="name"
                   type="text"
                   onChange={ev => this.handleChange(ev)}
-                  placeholder='name'
-                  />
+                  placeholder="name"
+               />
                <input
                   value={contact.phone}
                   name="phone"
                   type="tel"
-                  pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
                   required
                   onChange={ev => this.handleChange(ev)}
-                  placeholder='email'
-                  />
-               <input placeholder='phone' value={contact.email} name="email" type="email" onChange={ev => this.handleChange(ev)} />
-                  
+                  placeholder="phone"
+               />
+               <input
+                  placeholder="email"
+                  value={contact.email}
+                  name="email"
+                  type="email"
+                  onChange={ev => this.handleChange(ev)}
+               />
+               <input
+                  placeholder="wallet address"
+                  value={contact.walletAddress}
+                  name="walletAddress"
+                  type="text"
+                  onChange={ev => this.handleChange(ev)}
+               />
+
                <button onClick={ev => this.saveContact(ev)}>Save</button>
             </form>
          </section>

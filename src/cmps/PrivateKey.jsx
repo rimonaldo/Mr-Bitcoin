@@ -22,10 +22,10 @@ export const PrivateKey = props => {
             <div className="copy fa-s" onClick={ref}></div>
          </div>
 
-         <div className="wallet-box">
+         {/* <div className="wallet-box">
             <input ref={inputRef} className="key" onChange={handleChange} type="text" value={loggedUser.privateKey} />
             <div className="copy fa-s" onClick={ref}></div>
-         </div>
+         </div> */}
       </>
    )
 }
