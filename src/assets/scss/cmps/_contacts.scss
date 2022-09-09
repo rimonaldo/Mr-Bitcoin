@@ -24,12 +24,12 @@
     }
 
     button.fa-s{
-        background-color: hsl(348deg 82% 62%);
+        background-color: $clr1;
         border: none;
         border-radius: 50%;
 
-        width: 55px;
-        height: 55px;
+        width: 65px;
+        height: 65px;
         position: fixed;
         bottom: 5.5%;
         right: 5.5%;
@@ -42,5 +42,5 @@
 }
 
 .active{
-    color:#ee4f6f;
+    color:$clr1;
 }

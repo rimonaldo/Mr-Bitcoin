@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 import { userService } from '../services/userService'
 export const Moves = props => {
    const { amount, rate } = props
-   
+
    function getMovesToDisplay() {
       return amount ? props.moves.slice(0, amount) : props.moves
    }
@@ -22,7 +22,7 @@ export const Moves = props => {
    if (!props.moves.length)
       return (
          <div className="container moves">
-            <span className='no'>No moves to display</span>
+            <span className="no">No moves to display</span>
          </div>
       )
 
@@ -31,14 +31,14 @@ export const Moves = props => {
          <header className="main full">
             <span className="fa-s"></span> {amount ? `Last ${amount} moves ` : 'Moves history'}
          </header>
-         
+
          {getMovesToDisplay().map(move => {
-            const recived = move.to.name ===  JSON.parse(sessionStorage.getItem('loggedUser')).username
+            const recived = move.to.name === JSON.parse(sessionStorage.getItem('loggedUser')).username
             return (
                <div key={move.at} className="move">
-                  <div className={recived ? 'from':'to'}>
-                     <span >  {recived? 'from' : 'to'} </span>
-                     <Link  to={`/contact/${move.to._id}`}>{recived ? move.from.username : move.to.name}</Link>
+                  <div>
+                     <span className={recived ? 'from' : 'to'}> {recived ? 'FROM' : 'TO'} </span>
+                     <Link to={`/contact/${move.to._id}`}>{recived ? move.from.username : move.to.name}</Link>
                   </div>
 
                   <div className="amount">

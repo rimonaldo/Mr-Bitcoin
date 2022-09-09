@@ -71,7 +71,7 @@ export const MinerHub = props => {
                         nonce: <input onChange={ev => ev.stopPropagation()} type="text" value={block.nonce} />
                      </div>
                      <div>
-                        transactions:{' '}
+                        trans:{' '}
                         <input
                            onChange={ev => ev.stopPropagation()}
                            type="text"

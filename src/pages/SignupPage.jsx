@@ -32,6 +32,17 @@ export class _SignupPage extends Component {
       const loggedUser = await this.props.setLoggedUser(username, password)
       if (loggedUser) this.props.history.push('/')
    }
+   
+   async onStartDemo() {
+      const username = 'Employer'
+      const password = '123'
+      
+      console.log(username, password)
+      const loggedUser = await this.props.setLoggedUser(username, password)
+      if (loggedUser) this.props.history.push('/')
+   }
+
+   
 
    // HTML
    render() {
@@ -40,11 +51,32 @@ export class _SignupPage extends Component {
             <div className="hero">
                <h1>popCoin</h1>
                <p>
-                  popCoin lets you watch your favourite media and video games on demand, using the power of blockchain
+                  popCoin lets you keep, transfer and manage coins to watch your favourite media and video games on demand, using the power of blockchain
                </p>
                {/* <p>Get your favourite media and video games on demand</p> */}
             </div>
             <br />
+            {/* <input placeholder="username" type="text" onChange={ev => this.handleChange(ev)} name="username" /> */}
+            <button className="btn" onClick={() => this.onStartDemo()}>
+               Start demo
+            </button>
+
+         <div className="galleries">
+
+         <div className="icons-gallery">
+               <div className="item">
+                  <img src="https://pic.onlinewebfonts.com/svg/img_204358.png" alt="" />
+                  <span>SAFE</span>
+               </div>
+               <div className="item">
+                  <img src="https://cdn-icons-png.flaticon.com/512/1408/1408799.png" alt="" />
+                  <span>FAST</span>
+               </div>
+               <div className="item">
+                  <img src="https://freepngimg.com/save/148583-handshake-vector-business-free-photo/980x700" alt="" />
+                  <span>RELIABLE</span>
+               </div>
+            </div>
 
             <div className="app-gallery">
                <div className="item">
@@ -65,29 +97,14 @@ export class _SignupPage extends Component {
                   <img src="https://i.ibb.co/hK71XB1/Image-4.png" alt="" />
                </div>
             </div>
+         </div>
 
-            <div className="gallery">
-               <div className="item">
-                  <img src="https://pic.onlinewebfonts.com/svg/img_204358.png" alt="" />
-                  <span>SAFE</span>
-               </div>
-               <div className="item">
-                  <img src="https://cdn-icons-png.flaticon.com/512/1408/1408799.png" alt="" />
-                  <span>FAST</span>
-               </div>
-               <div className="item">
-                  <img src="https://freepngimg.com/save/148583-handshake-vector-business-free-photo/980x700" alt="" />
-                  <span>RELIABLE</span>
-               </div>
-            </div>
+           
 
             <div className="logo"></div>
             <span>Please enter your name:</span>
             <br />
-            <input placeholder="username" type="text" onChange={ev => this.handleChange(ev)} name="username" />
-            <button className="button" onClick={() => this.onSignup()}>
-               Signup
-            </button>
+           
             <div>or</div>
             <span>Please enter existing username:</span>
             <br />

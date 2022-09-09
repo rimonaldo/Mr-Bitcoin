@@ -20,7 +20,15 @@ body {
   background: #485563;  /* fallback for old browsers */
   background: -webkit-linear-gradient(to right, #29323c, #485563);  
   background-image: linear-gradient(to bottom, #29323c, #485563); 
+  // background: hsla(232, 68%, 59%, 1);
 
+  // background: linear-gradient(90deg, hsla(232, 68%, 59%, 1) 0%, hsla(0, 2%, 12%, 1) 100%);
+  
+  background: -moz-linear-gradient(90deg, rgb(19, 23, 51) 0%, hsla(0, 2%, 12%, 1) 100%);
+  
+  background: -webkit-linear-gradient(90deg, rgb(21, 25, 56) 0%, hsla(0, 2%, 12%, 1) 100%);
+  
+  
   color: white;
 }
 
@@ -84,4 +92,29 @@ input {
 
 ::-webkit-scrollbar-thumb:vertical:active {
   -webkit-border-radius: 100px;
+}
+
+@media only screen and (min-width: 1000px) {
+  $layout-padding: 15vw;
+  html{
+    color: red;
+    padding:0 15vw;
+  }
+  body {
+    background-color: lightblue;
+  }
+}
+
+.btn{
+    background-color: $clr1;
+    border: none;
+    border-radius: 5px;
+    line-height: 2.2em;
+    padding: 0 10px;
+    color: rgb(233, 233, 233);
+    font-size: 1em;
+    transition: .2s;
+    &:hover{
+      background-color: $clr6;
+    }
 }

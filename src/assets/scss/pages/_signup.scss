@@ -2,18 +2,76 @@
    padding: 0 $layout-padding;
 
    .hero {
+      margin-top: 5vw;
+      @media only screen and (max-width: 1000px) {
+         font-size: 10px;
+         h1 {
+            text-align: center;
+         }
+      }
       h1 {
          color: $clr1;
-         font-size: 6em;
+         font-size: 5em;
       }
       p {
          font-size: 1.5em;
+         // color: $blu;
+      }
+
+      // margin-bottom: 10vw;
+   }
+
+   .btn {
+      margin: 5vw 0;
+      width: max(30%, 200px);
+      // padding: 0 4em;
+      line-height: 3.5em;
+      @media only screen and (max-width: 750px) {
+         width: 100%;
       }
    }
 
-   .gallery {
+   .galleries {
+      display: flex;
+      flex-direction: column;
+      @media only screen and (max-width: 750px) {
+         // flex-direction: column-reverse;
+      }
+      .app-gallery {
+         margin-top: 7vw;
+         display: flex;
+         flex-wrap: wrap;
+         justify-content: space-evenly;
+         gap: 2vw 0;
+         //    flex-direction: column;
+         //    border: 1px black solid;
+         margin-bottom: 3em;
+         .item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            flex-basis: 280px;
+            @media only screen and (min-width: 1360px) {
+               flex-basis: 400px;
+            }
+            span {
+               padding: 1em 0;
+               font-size: min(1.5em, 5vw);
+               // color: $success;
+            }
+         }
+
+         img {
+            // width: 150%;
+         }
+      }
+   }
+
+   .icons-gallery {
       display: flex;
       justify-content: space-between;
+      width: 75%;
+      margin: 0 auto;
       @media only screen and (max-width: 750px) {
          flex-direction: column;
          width: 100%;
@@ -42,33 +100,5 @@
          width: max(5vw, 50px);
          height: max(5vw, 50px);
       }
-   }
-}
-
-.app-gallery {
-   display: flex;
-   flex-wrap: wrap;
-   justify-content: space-evenly;
-   gap: 2vw 0;
-   //    flex-direction: column;
-//    border: 1px black solid;
-   margin-bottom: 3em;
-   .item {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      flex-basis: 270px;
-      @media only screen and (min-width: 1360px) {
-        flex-basis: 390px;
-     }
-      span {
-         padding: 1em 0;
-         font-size: 0.8em;
-         color: $success;
-      }
-   }
-
-   img{
-    // width: 150%;
    }
 }
