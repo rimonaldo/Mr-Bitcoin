@@ -39,6 +39,13 @@ canvas{
     @include for-wide-layout {
         max-width: $normal-breakpoint;
     }
+
+
+    @media only screen and (min-width: 750px) {
+        grid-template-columns: 15vw 1fr 15vw;
+    }
+    
+
 }
 
 // GRIDS

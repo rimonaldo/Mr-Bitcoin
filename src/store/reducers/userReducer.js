@@ -1,3 +1,5 @@
+import { userService } from "../../services/userService"
+
 const INITIAL_STATE = {
    loggedUser: JSON.parse(sessionStorage.getItem('loggedUser')) || null,
    moves: JSON.parse(localStorage.getItem('userMoves')) || [],
@@ -7,7 +9,6 @@ const INITIAL_STATE = {
 export function userReducer(state = INITIAL_STATE, action) {
    switch (action.type) {
       case 'SET_LOGGED_USER':
-         console.log(action.user)
          return {
             ...state,
             loggedUser: action.user,
@@ -28,11 +29,23 @@ export function userReducer(state = INITIAL_STATE, action) {
             at: Date.now(),
             amount: action.amount,
             _id:action._id,
-            to: { name: action.to.name, walletAddress: 'address', _id: action.to._id },
+            to: { name: action.to.username, walletAddress: 'address', _id: action.to._id },
          }
          let moves = loggedUser.moves
          if (!moves || !moves.length) moves = []
          moves.unshift(move)
+
+
+         let toMoves = action.to.moves
+         
+         console.log('moves',action.to.moves);
+         if (!toMoves || !toMoves.length) toMoves = []
+         move.recived = true
+         toMoves.unshift(move)
+         action.moves = toMoves
+         action.to.toMoves = [...toMoves]
+         console.log(action.to, toMoves);
+         userService.updateUser(action.to)         
          return {
             ...state,
             loggedUser: {

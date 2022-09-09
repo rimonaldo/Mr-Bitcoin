@@ -29,6 +29,8 @@ const gUser = {
 
 async function addTranaction(amount, toAddress) {
    const { walletAddress, privateKey } = await getUser()
+   const balance = await getBalance(privateKey)
+   if(amount > balance) return console.log('not enough coins');
    const tx = {
       fromAddress: walletAddress,
       toAddress: toAddress.walletAddress || 'address',
@@ -115,9 +117,14 @@ async function logout() {
 async function removeUser(userId) {
    return httpService.delete(`user/${userId}`)
 }
-async function updateUser(user) {
+async function updateUser(user = null, username) {
+   if(!user){
+      const users = await getUsers()
+      user = users.find(user=> user.username === username)
+   }
+   
    user = await httpService.put(`user/${user._id}`, user)
-   console.log('updating', user)
+   console.log('updating', user.username)
    if (getLoggedinUser()._id === user._id) _saveLocalUser(user)
    return user
 }

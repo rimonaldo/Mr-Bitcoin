@@ -21,6 +21,7 @@ export function setLoggedUser(username, password) {
 export function sendCoins(amount, to) {
    return async dispatch => {
       try {
+         to = await userService.getById(to._id)
          const tx = await userService.addTranaction(amount, to)
          const { _id } = tx
          dispatch({ type: 'SEND_COINS', amount, to, _id })

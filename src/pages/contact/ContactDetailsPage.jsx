@@ -1,10 +1,10 @@
-import React from "react"
-import { contactService } from "../../services/contactService"
-import { Link } from "react-router-dom"
-import { connect } from "react-redux"
-import { removeContact } from "../../store/actions/contactActions"
-import { sendCoins, saveUser } from "../../store/actions/userActions"
-import { Moves } from "../../cmps/Moves"
+import React from 'react'
+import { contactService } from '../../services/contactService'
+import { Link } from 'react-router-dom'
+import { connect } from 'react-redux'
+import { removeContact } from '../../store/actions/contactActions'
+import { sendCoins, saveUser } from '../../store/actions/userActions'
+import { Moves } from '../../cmps/Moves'
 
 export class _ContactDetailsPage extends React.Component {
    state = {
@@ -20,14 +20,14 @@ export class _ContactDetailsPage extends React.Component {
    }
 
    removeContact = () => {
-      const confirmation = window.confirm("this will remove contact perminantly, continue?")
+      const confirmation = window.confirm('this will remove contact perminantly, continue?')
       if (!confirmation) return
       this.props.removeContact(this.state.contact._id)
       this.goBack()
    }
 
    goBack = () => {
-      this.props.history.push("/contact")
+      this.props.history.push('/contact')
    }
 
    onSendCoins = async ev => {
@@ -41,12 +41,12 @@ export class _ContactDetailsPage extends React.Component {
 
    handleChange({ target }) {
       const field = target.name
-      const value = target.type === "number" ? +target.value || "" : target.value
+      const value = target.type === 'number' ? +target.value || '' : target.value
       this.setState(prevState => ({ [field]: value }))
    }
 
    signup = () => {
-      this.props.history.push("/signup")
+      this.props.history.push('/signup')
    }
 
    movesToContact() {

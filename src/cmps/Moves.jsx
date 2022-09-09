@@ -1,33 +1,21 @@
 import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
+import { userService } from '../services/userService'
 export const Moves = props => {
    const { amount, rate } = props
-
+   
    function getMovesToDisplay() {
       return amount ? props.moves.slice(0, amount) : props.moves
    }
 
    const formateTime = time => {
-      const monthNames = [
-         'Jan',
-         'Feb',
-         'March',
-         'April',
-         'May',
-         'June',
-         'July',
-         'Aug',
-         'Sept',
-         'Oct',
-         'Nov',
-         'Dec',
-      ]
+      const monthNames = ['Jan', 'Feb', 'March', 'April', 'May', 'June', 'July', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec']
       const date = new Date(time)
-      const moveDate =` ${monthNames[date.getMonth()]} ${date.getDate()} , ${date.getFullYear()}`
-      const mins = date.getMinutes()+''
-      const moveMins = mins.length < 2 ? '0'+date.getMinutes() : date.getMinutes()  
-      const hour =` ${date.getHours()}:${moveMins}`
+      const moveDate = ` ${monthNames[date.getMonth()]} ${date.getDate()} , ${date.getFullYear()}`
+      const mins = date.getMinutes() + ''
+      const moveMins = mins.length < 2 ? '0' + date.getMinutes() : date.getMinutes()
+      const hour = ` ${date.getHours()}:${moveMins}`
       return `${moveDate} | ${hour}`
    }
 
@@ -43,12 +31,14 @@ export const Moves = props => {
          <header className="main full">
             <span className="fa-s"></span> {amount ? `Last ${amount} moves ` : 'Moves history'}
          </header>
+         
          {getMovesToDisplay().map(move => {
+            const recived = move.to.name ===  JSON.parse(sessionStorage.getItem('loggedUser')).username
             return (
                <div key={move.at} className="move">
-                  <div className="to">
-                     <span> To </span>
-                     <Link to={`/contact/${move.to._id}`}>{move.to.name}</Link>
+                  <div className={recived ? 'from':'to'}>
+                     <span >  {recived? 'from' : 'to'} </span>
+                     <Link  to={`/contact/${move.to._id}`}>{recived ? move.from.username : move.to.name}</Link>
                   </div>
 
                   <div className="amount">
@@ -61,7 +51,9 @@ export const Moves = props => {
 
                   <div className="status-box">
                      <span>STATUS : </span>
-                     <span className={move.status||'approved'}>{move.status ?move.status.toUpperCase() : 'APPROVED'}</span>
+                     <span className={move.status || 'approved'}>
+                        {move.status ? move.status.toUpperCase() : 'APPROVED'}
+                     </span>
                   </div>
                   <div className="at">{formateTime(move.at)}</div>
                </div>

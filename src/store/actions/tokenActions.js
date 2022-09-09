@@ -40,6 +40,7 @@ export function minePending() {
       try {
          // dispatch({ type: 'MINE_PENDING' })
          dispatch({ type: 'SET_BLOCKS', blocks })
+         loadPending()
          return blocks
       } catch (err) {
          console.log(err)

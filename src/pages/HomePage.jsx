@@ -1,21 +1,21 @@
-import React from "react"
-import { userService } from "../services/userService"
-import { bitcoinService } from "../services/bitcoinService"
-import { BarChart } from "../cmps/LineChart.jsx"
-import { Moves } from "../cmps/Moves"
-import { setRate } from "../store/actions/tokenActions"
-import { setBalance } from "../store/actions/userActions"
-import { connect } from "react-redux"
+import React from 'react'
+import { userService } from '../services/userService'
+import { bitcoinService } from '../services/bitcoinService'
+import { BarChart } from '../cmps/LineChart.jsx'
+import { Moves } from '../cmps/Moves'
+import { setRate } from '../store/actions/tokenActions'
+import { setBalance } from '../store/actions/userActions'
+import { connect } from 'react-redux'
 
 export class _HomePage extends React.Component {
    state = {
       user: {},
-      rate: "",
+      rate: '',
       chartData: {
          labels: [1, 2, 3, 4],
          datasets: [
             {
-               label: "user gain",
+               label: 'user gain',
                data: [500, 100],
             },
          ],
@@ -29,7 +29,7 @@ export class _HomePage extends React.Component {
       const rate = chartData.datasets[0].data[lastDay]
       this.props.setRate(rate)
       this.props.setBalance(user.privateKey)
-      
+
       this.setState({ rate, user, chartData })
    }
 
@@ -39,11 +39,11 @@ export class _HomePage extends React.Component {
          labels: [],
          datasets: [
             {
-               label: "Daily price",
+               label: 'Daily price',
                data: [],
                fill: true,
-               backgroundColor: "#ffa50038",
-               borderColor: "#ffa50050",
+               backgroundColor: '#ffa50038',
+               borderColor: '#ffa50050',
             },
          ],
       }
@@ -55,7 +55,7 @@ export class _HomePage extends React.Component {
       let currDay
       rawDb.forEach(day => {
          currDay = new Date(day.x * 1000)
-         currDay = currDay.getMonth() + 1 + "." + currDay.getDate()
+         currDay = currDay.getMonth() + 1 + '.' + currDay.getDate()
          chartData.labels.push(currDay)
          chartData.datasets[0].data.push(this.formatCoins(day.y))
       })
@@ -68,40 +68,39 @@ export class _HomePage extends React.Component {
 
    componentWillUnmount() {}
 
-   setBalance({privateKey}){
-    
-   }
+   setBalance({ privateKey }) {}
 
    render() {
       const { user, chartData, rate } = this.state
-      const{balance} = this.props
+      const { balance } = this.props
       if (!chartData) return <div>Loading...</div>
       return (
          <section>
-
             <section className="home container">
-               <header>Hi, {user.username}</header>
-               <div className="balance-container">
-                  <div className="balance">
-                     <div className="b-header">CURRENT BALANCE</div>
-                     <div className="btc">
-                        BTC:{" "}
-                        <div>
-                           <div className="fa-b"></div>
-                           <span>{balance}</span>
+               <div className="chart-container">
+                  <header>Hi, {user.username}</header>
+                  <div className="balance-container">
+                     <div className="balance">
+                        <div className="b-header">CURRENT BALANCE</div>
+                        <div className="btc">
+                           BTC:{' '}
+                           <div>
+                              <div className="fa-b"></div>
+                              <span>{balance}</span>
+                           </div>
                         </div>
+                        <span>USD: ${(user.coins * rate).toFixed(2).toLocaleString()}</span>
                      </div>
-                     <span>USD: ${(user.coins * rate).toFixed(2).toLocaleString()}</span>
-                  </div>
 
-                  <div className="rate-container">
-                     <div className="b-header">CURRENT PRICE PER COIN</div>
-                     <div className="rate">${rate.toLocaleString()}</div>
+                     <div className="rate-container">
+                        <div className="b-header">CURRENT PRICE PER COIN</div>
+                        <div className="rate">${rate.toLocaleString()}</div>
+                     </div>
                   </div>
+                  {chartData ? <BarChart chartData={chartData} /> : ''}
                </div>
-               {chartData ? <BarChart chartData={chartData} /> : ""}
+               {user.moves ? <Moves moves={user.moves} amount={5} rate={rate} /> : ''}
             </section>
-            {user.moves ? <Moves moves={user.moves} amount={5} rate={rate} /> : ""}
          </section>
       )
    }
@@ -116,6 +115,6 @@ const mapStateToProps = state => {
    }
 }
 
-const mapDispatchToProps = { setRate,setBalance }
+const mapDispatchToProps = { setRate, setBalance }
 
 export const HomePage = connect(mapStateToProps, mapDispatchToProps)(_HomePage)

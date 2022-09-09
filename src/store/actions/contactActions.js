@@ -13,7 +13,6 @@ export function loadContacts() {
 }
 
 export function removeContact(contactId) {
-   console.log(contactId)
    return async (dispatch, getState) => {
       try {
          const contact = await contactService.deleteContact(contactId)

@@ -1,5 +1,7 @@
 .miner-hub {
    overflow-x: hidden;
+   padding: 0 $layout-padding;
+
 
    header {
       margin-top: 2em;
@@ -45,6 +47,11 @@
       list-style: none;
       display: flex;
       flex-direction: column;
+
+      display: grid;
+      // grid-template-columns: repeat(3,1fr);
+      grid-template-columns: repeat( auto-fit, minmax(320px, 1fr) );
+      gap: 5px;
       .block {
          background-color: rgb(250, 250, 250);
          color: rgb(33, 43, 160);
