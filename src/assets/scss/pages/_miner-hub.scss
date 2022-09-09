@@ -2,7 +2,6 @@
    overflow-x: hidden;
    padding: 0 $layout-padding;
 
-
    header {
       margin-top: 2em;
       text-align: center;
@@ -35,7 +34,6 @@
 
    button {
       width: 100%;
-      //   margin-bottom: 5vh;
       background-color: $clr1;
       border: none;
       border-radius: 3px;
@@ -50,7 +48,7 @@
 
       display: grid;
       // grid-template-columns: repeat(3,1fr);
-      grid-template-columns: repeat( auto-fit, minmax(320px, 1fr) );
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
       gap: 5px;
       .block {
          background-color: rgb(250, 250, 250);

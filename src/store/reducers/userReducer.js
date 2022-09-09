@@ -34,8 +34,6 @@ export function userReducer(state = INITIAL_STATE, action) {
          let moves = loggedUser.moves
          if (!moves || !moves.length) moves = []
          moves.unshift(move)
-
-
          let toMoves = action.to.moves
          
          console.log('moves',action.to.moves);
@@ -44,7 +42,6 @@ export function userReducer(state = INITIAL_STATE, action) {
          toMoves.unshift(move)
          action.moves = toMoves
          action.to.toMoves = [...toMoves]
-         console.log(action.to, toMoves);
          userService.updateUser(action.to)         
          return {
             ...state,

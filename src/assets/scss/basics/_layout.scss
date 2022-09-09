@@ -1,56 +1,56 @@
 
-.full {
-    grid-column: 1 / -1;
-}
+// .full {
+//     grid-column: 1 / -1;
+// }
 
 
-canvas{
-    max-height: 800px;
-    max-width: 1700px;
-    margin: 0 auto;
-}
-.container {
-    display: grid;
-    grid-template-columns: $layout-padding 1fr $layout-padding;
-    // max-height: 400px;
-    // max-width: 700px;
-    margin: 0 auto;
-    > * {
-        grid-column: 2;
-    }
+// canvas{
+//     max-height: 800px;
+//     max-width: 1700px;
+//     margin: 0 auto;
+// }
+// .container {
+//     display: grid;
+//     grid-template-columns: $layout-padding 1fr $layout-padding;
+//     // max-height: 400px;
+//     // max-width: 700px;
+//     margin: 0 auto;
+//     > * {
+//         grid-column: 2;
+//     }
 
-    > *.full {
-        grid-column: 1 / -1;
-    }
-
-
-    @include for-mobile-layout {
-        max-width: initial;
-    }
-
-    @include for-tablet-layout {
-        max-width: $mobile-breakpoint;
-    }
-
-    @include for-normal-layout {
-        max-width: $tablet-breakpoint;
-    }
-
-    @include for-wide-layout {
-        max-width: $normal-breakpoint;
-    }
+//     > *.full {
+//         grid-column: 1 / -1;
+//     }
 
 
-    @media only screen and (min-width: 750px) {
-        grid-template-columns: 15vw 1fr 15vw;
-    }
+//     @include for-mobile-layout {
+//         max-width: initial;
+//     }
+
+//     @include for-tablet-layout {
+//         max-width: $mobile-breakpoint;
+//     }
+
+//     @include for-normal-layout {
+//         max-width: $tablet-breakpoint;
+//     }
+
+//     @include for-wide-layout {
+//         max-width: $normal-breakpoint;
+//     }
+
+
+//     @media only screen and (min-width: 750px) {
+//         grid-template-columns: 15vw 1fr 15vw;
+//     }
     
 
-}
+// }
 
-// GRIDS
-.simple-cards-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-    grid-gap: 30px;
-}
+// // GRIDS
+// .simple-cards-grid {
+//     display: grid;
+//     grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+//     grid-gap: 30px;
+// }

@@ -21,8 +21,8 @@ export const Moves = props => {
 
    if (!props.moves.length)
       return (
-         <div className="container">
-            <span>No moves to display</span>
+         <div className="container moves">
+            <span className='no'>No moves to display</span>
          </div>
       )
 

@@ -26,6 +26,10 @@ $layout-padding: 5vw;
 
 @media only screen and (min-width: 600px) {
     $layout-padding: 15vw;
+    html{
+      color: red;
+      padding:0 15vw;
+    }
     body {
       background-color: lightblue;
     }
