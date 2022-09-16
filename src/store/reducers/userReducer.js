@@ -1,4 +1,4 @@
-import { userService } from "../../services/userService"
+import { userService } from "../../services/user.service"
 
 const INITIAL_STATE = {
    loggedUser: JSON.parse(sessionStorage.getItem('loggedUser')) || null,

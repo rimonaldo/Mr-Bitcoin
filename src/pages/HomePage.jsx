@@ -1,6 +1,6 @@
 import React from 'react'
-import { userService } from '../services/userService'
-import { bitcoinService } from '../services/bitcoinService'
+import { userService } from '../services/user.service'
+import { tokenService } from '../services/token.service'
 import { BarChart } from '../cmps/LineChart.jsx'
 import { Moves } from '../cmps/Moves'
 import { setRate } from '../store/actions/tokenActions'
@@ -34,7 +34,6 @@ export class _HomePage extends React.Component {
    }
 
    async getMarketData() {
-      let currDay
       const chartData = {
          labels: [],
          datasets: [
@@ -47,7 +46,7 @@ export class _HomePage extends React.Component {
             },
          ],
       }
-      const rawDb = await bitcoinService.getMarketPrice()
+      const rawDb = await tokenService.getMarketPrice()
       return this.formatChartData(rawDb, chartData)
    }
 
@@ -77,18 +76,20 @@ export class _HomePage extends React.Component {
       return (
          <section>
             <section className="home container">
-               <div className="chart-container">
+               <div className="balance-container">
                   <header>Hi, {user.username}</header>
-                  <div className="balance-container">
+                  <div className="chart-container">
+                     
                      <div className="balance">
                         <div className="b-header">CURRENT BALANCE</div>
-                        <div className="btc">
-                           BTC:{' '}
+                        <div className="current">
+                           POP:{' '}
                            <div>
                               <div className="fa-b"></div>
                               <span>{balance}</span>
                            </div>
                         </div>
+
                         <span>USD: ${(user.coins * rate).toFixed(2).toLocaleString()}</span>
                      </div>
 
@@ -96,6 +97,7 @@ export class _HomePage extends React.Component {
                         <div className="b-header">CURRENT PRICE PER COIN</div>
                         <div className="rate">${rate.toLocaleString()}</div>
                      </div>
+
                   </div>
                   {chartData ? <BarChart chartData={chartData} /> : ''}
                </div>

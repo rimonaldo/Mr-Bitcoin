@@ -1,5 +1,5 @@
-import { bitcoinService } from '../../services/bitcoinService'
-import { userService } from '../../services/userService'
+import { tokenService } from '../../services/token.service'
+import { userService } from '../../services/user.service'
 export function setRate(rate) {
    return async dispatch => {
       try {
@@ -23,7 +23,7 @@ export function getBalance(address) {
 
 export function loadPending() {
    return async dispatch => {
-      const pending = await bitcoinService.getPending()
+      const pending = await tokenService.getPending()
       try {
          dispatch({ type: 'SET_PENDING', pending })
          return pending
@@ -36,7 +36,7 @@ export function loadPending() {
 export function minePending() {
    return async dispatch => {
       const {walletAddress} = await userService.getUser() 
-      const blocks = await bitcoinService.minePending(walletAddress)
+      const blocks = await tokenService.minePending(walletAddress)
       try {
          // dispatch({ type: 'MINE_PENDING' })
          dispatch({ type: 'SET_BLOCKS', blocks })

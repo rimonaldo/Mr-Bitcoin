@@ -1,4 +1,4 @@
-.balance-container {
+.chart-container {
   display: flex;
   justify-content: space-between;
 
@@ -7,13 +7,7 @@
     font-size: 12px;
   }
 
-
-  .balance{
-    >*{
-        
-    }
-  }
-  .btc {
+  .current {
     display: flex;
     div {
       margin-inline-start: 4px;

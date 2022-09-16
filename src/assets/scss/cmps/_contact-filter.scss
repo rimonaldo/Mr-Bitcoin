@@ -1,4 +1,7 @@
 .contact-filter{
+    @media only screen and (min-width: $wide-breakpoint) {
+        padding: 0 $large-padding;
+     }
     background-color: rgba(0, 0, 0, 0.5);
     border: none;
     width: 100%;

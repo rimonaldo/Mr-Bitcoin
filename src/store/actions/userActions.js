@@ -1,4 +1,5 @@
-import { userService } from '../../services/userService'
+import { tokenService } from '../../services/token.service'
+import { userService } from '../../services/user.service'
 
 export function setLoggedUser(username, password) {
    return async dispatch => {
@@ -22,7 +23,7 @@ export function sendCoins(amount, to) {
    return async dispatch => {
       try {
          to = await userService.getById(to._id)
-         const tx = await userService.addTranaction(amount, to)
+         const tx = await tokenService.addTranaction(amount, to)
          const { _id } = tx
          dispatch({ type: 'SEND_COINS', amount, to, _id })
       } catch (err) {
@@ -34,7 +35,7 @@ export function sendCoins(amount, to) {
 export function setBalance(privateKey) {
    return async dispatch => {
       try {
-         const balance = await userService.getBalance(privateKey)
+         const balance = await tokenService.getBalanceByKey(privateKey)
          dispatch({ type: 'SET_BALANCE', balance })
       } catch (err) {
          console.log(err)
@@ -48,7 +49,7 @@ export function saveUser(userToUpadte) {
       try {
          await userService.updateUser(userToUpadte)
          dispatch({ type: 'SAVE_USER', userToUpadte })
-         // userService._saveLocalUser(userToUpadte)
+         userService._saveLocalUser(userToUpadte)
       } catch (err) {
          console.log(err)
       }

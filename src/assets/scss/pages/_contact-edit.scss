@@ -1,36 +1,42 @@
-.contact-edit{
+.contact-edit {
+   form {
+      padding: 0 $layout-padding;
+      @media only screen and (min-width: $wide-breakpoint) {
+         padding: 0 $large-padding;
+      }
+      display: flex;
+      flex-direction: column;
 
-    form{
-        display: flex;
-        flex-direction: column;
+      margin-top: 6em;
 
-        margin-top: 6em;
+      > * {
+         margin-bottom: 5px;
+         border: none;
+         background-color: $clr2;
+         color: white;
+         font-size: 16px;
+         line-height: 2em;
+         padding-left: 1em;
+         border-radius: 3px;
+      }
 
-        >*{
-            margin-bottom: 5px;
-            border: none;
-            background-color: $clr2;
-            color: white;
-            font-size: 16px;
-            line-height: 2em;
-            padding-left: 1em;
-            border-radius: 3px;
-        }
+      button {
+         background-color: $clr1;
+         width: 20%;
+         display: flex;
+      }
+   }
 
-        button{
-            background-color: $clr1;
-            width: 20%;
-            display: flex;
-        }
-    }
-
-    header{
-        display: flex;
-        align-items: center;
-        line-height: 1.5em;
-        height: 2.7rem;
-        a{
-            line-height: 2em;
-        }
-    }
+   header {
+    @media only screen and (min-width: $wide-breakpoint) {
+        padding: 0 $large-padding;
+     }
+      display: flex;
+      align-items: center;
+      line-height: 1.5em;
+      height: 2.7rem;
+      a {
+         line-height: 2em;
+      }
+   }
 }

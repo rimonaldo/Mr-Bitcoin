@@ -1,8 +1,8 @@
 import React from "react"
-import { contactService } from "../../services/contactService"
+import { contactService } from "../../services/contact.service"
 import { ContactList } from "../../cmps/ContactList"
 import { connect } from "react-redux"
-import { userService } from "../../services/userService"
+import { userService } from "../../services/user.service"
 import { loadContacts, removeContact, setFilterBy } from "../../store/actions/contactActions"
 import { ContactFilter } from "../../cmps/ContactFilter"
 

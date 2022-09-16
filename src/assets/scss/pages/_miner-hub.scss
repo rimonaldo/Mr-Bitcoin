@@ -1,7 +1,9 @@
 .miner-hub {
    overflow-x: hidden;
    padding: 0 $layout-padding;
-
+   @media only screen and (min-width: $wide-breakpoint) {
+      padding: 0 $large-padding;
+   }
    header {
       margin-top: 2em;
       text-align: center;

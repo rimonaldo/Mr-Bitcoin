@@ -21,14 +21,9 @@ body {
   background: -webkit-linear-gradient(to right, #29323c, #485563);  
   background-image: linear-gradient(to bottom, #29323c, #485563); 
   // background: hsla(232, 68%, 59%, 1);
-
   // background: linear-gradient(90deg, hsla(232, 68%, 59%, 1) 0%, hsla(0, 2%, 12%, 1) 100%);
-  
+  // background: -webkit-linear-gradient(90deg, hsla(232, 68%, 59%, 1) 0%, hsla(0, 2%, 12%, 1) 100%);
   background: -moz-linear-gradient(90deg, rgb(19, 23, 51) 0%, hsla(0, 2%, 12%, 1) 100%);
-  
-  background: -webkit-linear-gradient(90deg, rgb(21, 25, 56) 0%, hsla(0, 2%, 12%, 1) 100%);
-  
-  
   color: white;
 }
 
@@ -55,6 +50,7 @@ p {
 a {
   text-decoration: none;
   color: inherit;
+  cursor: pointer;
   &:hover {
     text-decoration: underline;
   }
@@ -98,7 +94,7 @@ input {
   $layout-padding: 15vw;
   html{
     color: red;
-    padding:0 15vw;
+    // padding:0 5vw;
   }
   body {
     background-color: lightblue;
@@ -117,4 +113,8 @@ input {
     &:hover{
       background-color: $clr6;
     }
+}
+
+.active {
+  color: $clr1;
 }

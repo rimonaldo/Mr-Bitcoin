@@ -1,32 +1,75 @@
+.landing{
+   // width: 100vw;
+   // height: 100vh;
+
+   .bg{
+      position: relative;
+      width: 100vw;
+      height: 150vh;
+      background: white;
+      background-color: white;
+      // border: 1px red solid;
+      position: absolute;
+      top: $header-height;
+      z-index: -1;
+
+      img{
+         width: 32vw;
+         position: absolute;
+         right: 5em;
+         // top: $header-height;
+      }
+   }
+}
+
 .signup-page {
    padding: 0 $layout-padding;
+   z-index: 1;
+
+   .doodle-container{
+      height: 600px;
+      border: 1px black solid;
+      .doodle{
+         background-image: url('https://i.ibb.co/7zDh80P/pop-Coin-doodle.png');
+         background-position: center;
+         background-size: contain;
+      }
+   }
+
 
    .hero {
-      margin-top: 5vw;
+      // margin-top: 5vw;
+      font-size: 1.5rem;
       @media only screen and (max-width: 1000px) {
          font-size: 10px;
          h1 {
-            text-align: center;
+            // text-align: center;
          }
       }
       h1 {
          color: $clr1;
          font-size: 5em;
+         line-height: 2em;
       }
       p {
-         font-size: 1.5em;
-         // color: $blu;
+         font-size: 1.2em;
+         color: black;
+         width: 50%;
+         margin-bottom: 5vw;
+         @media only screen and (max-width: $tablet-breakpoint) {
+            width: 100%;
+         }
       }
 
       // margin-bottom: 10vw;
    }
 
    .btn {
-      margin: 5vw 0;
+      margin-bottom: 3vw ;
       width: max(30%, 200px);
       // padding: 0 4em;
       line-height: 3.5em;
-      @media only screen and (max-width: 750px) {
+      @media only screen and (max-width: $tablet-breakpoint) {
          width: 100%;
       }
    }
@@ -34,11 +77,14 @@
    .galleries {
       display: flex;
       flex-direction: column;
-      @media only screen and (max-width: 750px) {
+      @media only screen and (max-width: $tablet-breakpoint) {
          // flex-direction: column-reverse;
       }
       .app-gallery {
-         margin-top: 7vw;
+         // border: 1px black solid;
+         width: 60%;
+         margin: 0 auto;
+         // margin-top: 7vw;
          display: flex;
          flex-wrap: wrap;
          justify-content: space-evenly;
@@ -52,12 +98,12 @@
             align-items: center;
             flex-basis: 280px;
             @media only screen and (min-width: 1360px) {
-               flex-basis: 400px;
+               flex-basis: 350px;
             }
             span {
                padding: 1em 0;
                font-size: min(1.5em, 5vw);
-               // color: $success;
+               color: black;
             }
          }
 
@@ -72,7 +118,7 @@
       justify-content: space-between;
       width: 75%;
       margin: 0 auto;
-      @media only screen and (max-width: 750px) {
+      @media only screen and (max-width: $tablet-breakpoint) {
          flex-direction: column;
          width: 100%;
          .item {
@@ -90,11 +136,21 @@
          display: flex;
          flex-direction: column;
          align-items: center;
-         span {
-            padding: 1em 0;
-            font-size: 0.8em;
+         &.safe{
             color: $success;
          }
+         &.fast{
+            color: $danger;
+         }
+         &.reliable{
+            color: $blu;
+         }
+         span {
+            padding: 1em 0;
+            font-size: 1.8em;
+         }
+
+        
       }
       img {
          width: max(5vw, 50px);

@@ -1,0 +1,15 @@
+.doodle{
+    width: 100%;
+    img{
+        z-index: -1;
+        height: 30vw;
+        margin: 0 auto;
+        position: relative;
+        left: 35%;
+    }
+    background-color: white;
+    position: absolute;
+    height: 195vw;
+    margin: $header-height auto 0;
+    z-index: -1;
+}

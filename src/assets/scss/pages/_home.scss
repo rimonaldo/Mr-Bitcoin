@@ -1,12 +1,17 @@
 .home {
    background-color: rgba(16, 18, 19, 0.342);
-   > * {
-      flex: 1;
-   }
    display: flex;
    flex-direction: column;
-   .chart-container {
+   padding-bottom: 1em;
+   @media only screen and (min-width: $tablet-breakpoint) {
+      background-color: rgba(16, 18, 19, 0);
+   }
+
+   .balance-container {
       padding: 0 $layout-padding;
+      @media only screen and (min-width: $wide-breakpoint) {
+         padding: 0 $large-padding;
+      }
       header {
          font-size: 1.5em;
          border-bottom: 1px rgba(141, 141, 141, 0.171) solid;
@@ -15,15 +20,17 @@
       }
    }
 
-   @media only screen and (min-width: 750px) {
-      // background-color: rgba(16, 18, 19, 0);
-      // flex-direction: row;
-      .chart-container {
-         // width: 1000px;
-         // padding: 0 1em;
-         // margin: 0 auto;
+   .moves {
+      header {
+         @media only screen and (min-width: $wide-breakpoint) {
+            padding: 0 $large-padding;
+         }
+      }
+
+      .move {
+         @media only screen and (min-width: $wide-breakpoint) {
+            padding: 0 $large-padding;
+         }
       }
    }
-
-   padding-bottom: 1em;
 }

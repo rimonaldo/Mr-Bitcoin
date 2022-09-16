@@ -1,46 +1,46 @@
-.contacts{
-    // border: 1px red solid;
-    padding: 0 $layout-padding;
-    .contact{
-        display: flex;
-        align-items: center;
-        margin-bottom: 10px;
-        cursor: pointer;
-        .avatar{
-            width: 3.5em;
-            height: 3.5em;
-        }
+.contacts {
+   padding: 0 $layout-padding;
+   @media only screen and (min-width: $wide-breakpoint) {
+      padding: 0 $large-padding;
+   }
+   
+   .contact {
+      display: flex;
+      align-items: center;
+      margin-bottom: 10px;
+      cursor: pointer;
+      .avatar {
+         width: 3.5em;
+         height: 3.5em;
+      }
 
-        .info{
-            margin-inline-start: 1em;
-            display: flex;
-            flex-direction: column;
-            // font-size: 14px;
-            .phone{
-                font-size: .7em;
-                color: rgb(177, 177, 177)
-            }
-        }
-    }
+      .info {
+         margin-inline-start: 1em;
+         display: flex;
+         flex-direction: column;
+         // font-size: 14px;
+         .phone {
+            font-size: 0.7em;
+            color: rgb(177, 177, 177);
+         }
+      }
+   }
 
-    button.fa-s{
-        background-color: $clr1;
-        border: none;
-        border-radius: 50%;
-
-        width: 65px;
-        height: 65px;
-        position: fixed;
-        bottom: 5.5%;
-        right: 5.5%;
-        color: white;
-        &::before{
-            content: '\2b';
-            font-size: 1.5rem;
-        }
-    }
+   button.fa-s {
+      background-color: $clr1;
+      border: none;
+      border-radius: 50%;
+      width: 65px;
+      height: 65px;
+      position: fixed;
+      bottom: 5.5%;
+      right: 5.5%;
+      color: white;
+      &::before {
+         content: '\2b';
+         font-size: 1.5rem;
+      }
+   }
 }
 
-.active{
-    color:$clr1;
-}
+

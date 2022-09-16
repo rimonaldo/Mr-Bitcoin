@@ -1,6 +1,4 @@
-import Axios from 'axios'
 import { httpService } from './http.service'
-const axios = Axios.create({ withCredentials: true })
 
 const STORAGE_KEY = 'loggedUser'
 const LOGGED_KEY = 'loggedUser'
@@ -15,8 +13,6 @@ export const userService = {
    getById,
    getUser,
    _saveLocalUser,
-   addTranaction,
-   getBalance,
 }
 
 const gUser = {
@@ -25,25 +21,6 @@ const gUser = {
    email: 'ochoahyde@renovize.com',
    phone: '+1 (968) 593-3824',
    coins: 100,
-}
-
-async function addTranaction(amount, toAddress) {
-   const { walletAddress, privateKey } = await getUser()
-   const balance = await getBalance(privateKey)
-   if(amount > balance) return console.log('not enough coins');
-   const tx = {
-      fromAddress: walletAddress,
-      toAddress: toAddress.walletAddress || 'address',
-      amount: +amount,
-      privateKey,
-   }
-   return await httpService.post('popCoin/transaction', tx)
-}
-
-async function getBalance(privateKey) {
-   const balance = await httpService.get(`popCoin/wallet/${privateKey}`)
-   const signupBonus = 1000
-   return balance + signupBonus
 }
 
 function getUser() {
@@ -59,37 +36,6 @@ async function signup(username) {
 
    if (user) console.log(username, 'is logged')
    return _saveLocalUser(user)
-}
-
-async function addMove(amount) {
-   const loggedUser = await getUser()
-   const move = { from: loggedUser.username, at: Date.now(), amount }
-   let moves = loggedUser.moves
-
-   console.log(moves)
-   if (!moves || !moves.length) moves = []
-   console.log(moves)
-   moves.push(move)
-   console.log(moves)
-   // saveUser(loggedUser)
-}
-
-function saveUser(user) {
-   console.log('saving to session storage')
-   sessionStorage.setItem(LOGGED_KEY, JSON.stringify(user))
-}
-
-function _makeId(length = 7) {
-   var text = ''
-   var possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
-   for (var i = 0; i < length; i++) {
-      text += possible.charAt(Math.floor(Math.random() * possible.length))
-   }
-   return text
-}
-
-function getWalletAddress() {
-   return getUser().walletAddress
 }
 
 async function getUsers() {
@@ -154,3 +100,36 @@ function _saveLocalUser(user) {
 //       gWatchedUser = watchedUser
 //   })
 // })()
+
+
+// async function addMove(amount) {
+//    const loggedUser = await getUser()
+//    const move = { from: loggedUser.username, at: Date.now(), amount }
+//    let moves = loggedUser.moves
+
+//    console.log(moves)
+//    if (!moves || !moves.length) moves = []
+//    console.log(moves)
+//    moves.push(move)
+//    console.log(moves)
+//    // saveUser(loggedUser)
+// }
+
+// async function addTranaction(amount, toAddress) {
+//    const { walletAddress, privateKey } = await getUser()
+//    const balance = await getBalance(privateKey)
+//    if(amount > balance) return console.log('not enough coins');
+//    const tx = {
+//       fromAddress: walletAddress,
+//       toAddress: toAddress.walletAddress || 'address',
+//       amount: +amount,
+//       privateKey,
+//    }
+//    return await httpService.post('popCoin/transaction', tx)
+// }
+
+// async function getBalance(privateKey) {
+//    const balance = await httpService.get(`popCoin/wallet/${privateKey}`)
+//    const signupBonus = 1000
+//    return balance + signupBonus
+// }

@@ -1,5 +1,5 @@
 import React from 'react'
-import { contactService } from '../../services/contactService'
+import { contactService } from '../../services/contact.service'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { removeContact } from '../../store/actions/contactActions'
@@ -45,11 +45,7 @@ export class _ContactDetailsPage extends React.Component {
       this.setState(prevState => ({ [field]: value }))
    }
 
-   signup = () => {
-      this.props.history.push('/signup')
-   }
-
-   movesToContact() {
+   getMovesToContact() {
       const { contact } = this.state
       const { user } = this.props
       let moves = user.moves
@@ -65,12 +61,14 @@ export class _ContactDetailsPage extends React.Component {
       if (!contact) return <div>loading...</div>
       return (
          <section className="contact-details container">
-            <header className="full">
-               <span onClick={this.goBack}>Back</span>
+
+            <header>
+               <a onClick={this.goBack}>Back</a>
                <Link to={`/contact/edit/${contact._id}`}>
                   <span>Edit</span>
                </Link>
             </header>
+
             <div className="info">
                <div className="avatar"></div>
                <div className="name">{contact.name}</div>
@@ -80,8 +78,9 @@ export class _ContactDetailsPage extends React.Component {
                <input type="text" name="amount" onChange={ev => this.handleChange(ev)} />
                <button onClick={ev => this.onSendCoins(ev)}>Transfer</button>
             </form>
-            <div className="moves full">
-               <Moves moves={this.movesToContact()} rate={rate} />
+
+            <div className="moves">
+               <Moves moves={this.getMovesToContact()} rate={rate} />
             </div>
          </section>
       )
@@ -96,7 +95,5 @@ const mapStateToProps = state => {
       rate: state.tokenModule.rate,
    }
 }
-
 const mapDispatchToProps = { removeContact, sendCoins, saveUser }
-
 export const ContactDetailsPage = connect(mapStateToProps, mapDispatchToProps)(_ContactDetailsPage)

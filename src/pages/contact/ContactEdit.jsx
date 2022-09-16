@@ -1,7 +1,9 @@
 import { Component, createRef } from 'react'
-import { contactService } from '../../services/contactService'
+import { contactService } from '../../services/contact.service'
 import { Link } from 'react-router-dom'
-export class ContactEdit extends Component {
+import { connect } from 'react-redux'
+import { removeContact } from '../../store/actions/contactActions'
+export class _ContactEdit extends Component {
    state = {
       contact: null,
    }
@@ -36,6 +38,13 @@ export class ContactEdit extends Component {
 
    goBack = () => {
       this.props.history.push('/contact')
+   }
+
+   onRemoveContact = () => {
+      const confirmation = window.confirm('this will remove contact perminantly, continue?')
+      if (!confirmation) return
+      this.props.removeContact(this.state.contact._id)
+      this.goBack()
    }
 
    render() {
@@ -87,3 +96,14 @@ export class ContactEdit extends Component {
       )
    }
 }
+
+// REDUX CONFIGORATION
+// const mapStateToProps = state => {
+//    return {
+//       user: state.userModule.loggedUser,
+//       contacts: state.contactModule.contacts,
+//       rate: state.tokenModule.rate,
+//    }
+// }
+const mapDispatchToProps = { removeContact }
+export const ContactEdit = connect(mapDispatchToProps)(_ContactEdit)

@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
-import { userService } from '../services/userService'
+import { userService } from '../services/user.service'
 export const Moves = props => {
    const { amount, rate } = props
 
