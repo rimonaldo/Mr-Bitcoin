@@ -13,6 +13,8 @@ export const userService = {
    getById,
    getUser,
    _saveLocalUser,
+   signupOthers,
+   getAsyncUser,
 }
 
 const gUser = {
@@ -24,18 +26,44 @@ const gUser = {
 }
 
 function getUser() {
-   const user = JSON.parse(sessionStorage.getItem(LOGGED_KEY)) || gUser
+   let user = JSON.parse(sessionStorage.getItem(LOGGED_KEY)) || gUser
+   user.contacts = user.contacts || []
    return new Promise((resolve, reject) => {
       user ? resolve(user) : reject('no user is logged')
    })
 }
 
-async function signup(username) {
-   let signupInfo = { username, password: '123' }
+
+async function getAsyncUser() {
+   let user = await httpService.get(`user/${getUser()._id}`)
+   user.contacts = user.contacts || []
+   return new Promise((resolve, reject) => {
+      user ? resolve(user) : reject('no user is logged')
+   })
+}
+
+async function signup({ username = name.split(' ')[0].toLowerCase(), password = '123', email, phone, name, id }) {
+   let signupInfo = { username, password, id }
    const user = await httpService.post('auth/signup', signupInfo)
 
    if (user) console.log(username, 'is logged')
    return _saveLocalUser(user)
+}
+
+async function signupOthers(contacts) {
+   let userPromises = []
+   contacts.map(contact => {
+      // contact.username = contact.username.split(' '[0].toLowerCase())
+      contact.password = '123'
+      let signupInfo = contact
+      userPromises.push(httpService.post('auth/signup', signupInfo))
+   })
+
+   return Promise.all(userPromises).then(signedUsers => {
+      return new Promise(resolve => {
+         resolve(signedUsers)
+      })
+   })
 }
 
 async function getUsers() {
@@ -49,7 +77,7 @@ async function getById(userId) {
 }
 
 async function login(credentials) {
-   console.log('login with', credentials);
+   console.log('login with', credentials)
    const user = await httpService.post('auth/login', credentials)
    if (user) return _saveLocalUser(user)
 }
@@ -64,13 +92,13 @@ async function removeUser(userId) {
    return httpService.delete(`user/${userId}`)
 }
 async function updateUser(user = null, username) {
-   if(!user){
+   if (!user) {
       const users = await getUsers()
-      user = users.find(user=> user.username === username)
+      user = users.find(user => user.username === username)
    }
    
    user = await httpService.put(`user/${user._id}`, user)
-   console.log('updating', user.username)
+   console.log('updating', user)
    if (getLoggedinUser()._id === user._id) _saveLocalUser(user)
    return user
 }
@@ -82,54 +110,3 @@ function _saveLocalUser(user) {
    sessionStorage.setItem(STORAGE_KEY, JSON.stringify(user))
    return user
 }
-
-// ;(async () => {
-//   var user = getLoggedinUser()
-//   // Dev Helper: Listens to when localStorage changes in OTHER browser
-
-//   // Here we are listening to changes for the watched user (comming from other browsers)
-//   window.addEventListener('storage', async () => {
-//       if (!gWatchedUser) return
-//       const freshUsers = await storageService.query('user')
-//       const watchedUser = freshUsers.find(u => u._id === gWatchedUser._id)
-//       if (!watchedUser) return
-//       if (gWatchedUser.score !== watchedUser.score) {
-//           console.log('Watched user score changed - localStorage updated from another browser')
-//           socketService.emit(SOCKET_EVENT_USER_UPDATED, watchedUser)
-//       }
-//       gWatchedUser = watchedUser
-//   })
-// })()
-
-
-// async function addMove(amount) {
-//    const loggedUser = await getUser()
-//    const move = { from: loggedUser.username, at: Date.now(), amount }
-//    let moves = loggedUser.moves
-
-//    console.log(moves)
-//    if (!moves || !moves.length) moves = []
-//    console.log(moves)
-//    moves.push(move)
-//    console.log(moves)
-//    // saveUser(loggedUser)
-// }
-
-// async function addTranaction(amount, toAddress) {
-//    const { walletAddress, privateKey } = await getUser()
-//    const balance = await getBalance(privateKey)
-//    if(amount > balance) return console.log('not enough coins');
-//    const tx = {
-//       fromAddress: walletAddress,
-//       toAddress: toAddress.walletAddress || 'address',
-//       amount: +amount,
-//       privateKey,
-//    }
-//    return await httpService.post('popCoin/transaction', tx)
-// }
-
-// async function getBalance(privateKey) {
-//    const balance = await httpService.get(`popCoin/wallet/${privateKey}`)
-//    const signupBonus = 1000
-//    return balance + signupBonus
-// }

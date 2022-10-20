@@ -20,6 +20,9 @@
 @import "pages/contact-details";
 @import "pages/home";
 
+// Atoms
+@import "atoms/avatar";
+
 // Components
 @import "cmps/doodle";
 @import "cmps/block";
@@ -27,7 +30,6 @@
 @import "cmps/key";
 @import "cmps/send-coins";
 @import "cmps/contact-filter";
-@import "cmps/avatar";
 @import "cmps/moves";
 @import "cmps/contacts";
 @import "cmps/header";

@@ -1,48 +1,9 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { setLoggedUser } from '../store/actions/userActions'
+import { loadContacts } from '../store/actions/contactActions'
 export class _SignupPage extends Component {
-   state = {
-      username: '',
-      password: '',
-   }
-   componentDidMount() {}
 
-   // ON INPUT CHANGE SET USER NAME
-   async handleChange({ target }) {
-      const field = target.name
-      const value = target.type === 'number' ? +target.value || '' : target.value
-      this.setState(prevState => ({
-         [field]: value,
-      }))
-   }
-
-   // DISPATCH SET LOGGED USER
-   async onSignup() {
-      const name = this.state.username
-      if (!name) return
-      const loggedUser = await this.props.setLoggedUser(name)
-      if (loggedUser) this.props.history.push('/')
-   }
-
-   async onLogin() {
-      const { username, password } = this.state
-      console.log(username, password)
-      if (!username || !password) return
-      const loggedUser = await this.props.setLoggedUser(username, password)
-      if (loggedUser) this.props.history.push('/')
-   }
-
-   async onStartDemo() {
-      const username = 'Employer'
-      const password = '123'
-
-      console.log(username, password)
-      const loggedUser = await this.props.setLoggedUser(username, password)
-      if (loggedUser) this.props.history.push('/')
-   }
-
-   // HTML
    render() {
       return (
          <section className="landing">
@@ -104,21 +65,70 @@ export class _SignupPage extends Component {
                </div>
 
                <div className="logo"></div>
-               <span>Please enter your name:</span>
-               <br />
-
-               <div>or</div>
-               <span>Please enter existing username:</span>
+               <span>login</span>
                <br />
                <input placeholder="username" type="text" onChange={ev => this.handleChange(ev)} name="username" />
-               <input placeholder="password" type="text" onChange={ev => this.handleChange(ev)} name="password" />
+               {/* <input placeholder="password" type="text" onChange={ev => this.handleChange(ev)} name="password" /> */}
                <button className="button" onClick={() => this.onLogin()}>
                   Login
+               </button>
+
+               <span>signup</span>
+               <br />
+               <input placeholder="username" type="text" onChange={ev => this.handleChange(ev)} name="username" />
+               <button className="button" onClick={() => this.onSignup()}>
+                  Signup
                </button>
             </div>
          </section>
       )
    }
+
+   state = {
+      username: '',
+      password: '123',
+   }
+   componentDidMount() {}
+
+   // ON INPUT CHANGE SET USER NAME
+   async handleChange({ target }) {
+      const field = target.name
+      const value = target.type === 'number' ? +target.value || '' : target.value
+      this.setState(prevState => ({
+         [field]: value,
+      }))
+   }
+
+   // DISPATCH SET LOGGED USER
+   async onSignup() {
+      const name = this.state.username
+      if (!name) return
+      const loggedUser = await this.props.setLoggedUser(name)
+      if (loggedUser) this.loadApp(loggedUser)
+   }
+
+   async onLogin() {
+      const { username, password } = this.state
+      if (!username || !password) return
+      const loggedUser = await this.props.setLoggedUser(username, password)
+      if (loggedUser) this.loadApp(loggedUser)
+   }
+
+   async onStartDemo() {
+      const username = 'Employer'
+      const password = '123'
+      const loggedUser = await this.props.setLoggedUser(username, password)
+      if (loggedUser) this.loadApp(loggedUser)
+   }
+
+   loadApp(loggedUser) {
+      if (loggedUser) {
+         this.props.loadContacts()
+         this.props.history.push('/')
+      }
+   }
+   // HTML
+  
 }
 
 // REDUX CONFIGORATION
@@ -128,6 +138,6 @@ const mapStateToProps = state => {
    }
 }
 
-const mapDispatchToProps = { setLoggedUser }
+const mapDispatchToProps = { setLoggedUser, loadContacts }
 
 export const SignupPage = connect(mapStateToProps, mapDispatchToProps)(_SignupPage)

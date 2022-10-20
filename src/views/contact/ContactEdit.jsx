@@ -11,8 +11,8 @@ export class _ContactEdit extends Component {
    inputRef = createRef()
 
    async componentDidMount() {
-      const contactId = this.props.match.params.id
-      let contact
+      const contactId = this.props.match.params._id
+      let contact 
       contactId
          ? (contact = await contactService.getContactById(contactId))
          : (contact = contactService.getEmptyContact())
@@ -33,7 +33,7 @@ export class _ContactEdit extends Component {
       ev.preventDefault()
       let contact = this.state.contact
       contact = await contactService.saveContact(contact)
-      this.goBack()
+      // this.goBack()
    }
 
    goBack = () => {
@@ -41,10 +41,12 @@ export class _ContactEdit extends Component {
    }
 
    onRemoveContact = () => {
-      const confirmation = window.confirm('this will remove contact perminantly, continue?')
-      if (!confirmation) return
-      this.props.removeContact(this.state.contact._id)
-      this.goBack()
+      const contactId = this.state.contact
+      console.log('delete', contactId);
+      // const confirmation = window.confirm('this will remove contact perminantly, continue?')
+      // if (!confirmation) return
+      // this.props.removeContact(contactId)
+      // this.goBack()
    }
 
    render() {
@@ -56,6 +58,9 @@ export class _ContactEdit extends Component {
                <Link to={`/contact/${contact._id}`}>
                   <span>Back</span>
                </Link>
+               <div className="delete">
+                  <span onClick={this.onRemoveContact}>Delete</span>
+               </div>
             </header>
 
             <form>
@@ -84,7 +89,7 @@ export class _ContactEdit extends Component {
                />
                <input
                   placeholder="wallet address"
-                  value={contact.walletAddress}
+                  value={contact.walletAddress || ''}
                   name="walletAddress"
                   type="text"
                   onChange={ev => this.handleChange(ev)}
@@ -98,12 +103,10 @@ export class _ContactEdit extends Component {
 }
 
 // REDUX CONFIGORATION
-// const mapStateToProps = state => {
-//    return {
-//       user: state.userModule.loggedUser,
-//       contacts: state.contactModule.contacts,
-//       rate: state.tokenModule.rate,
-//    }
-// }
+const mapStateToProps = state => {
+   return {
+      contacts: state.contactModule.contacts,
+   }
+}
 const mapDispatchToProps = { removeContact }
-export const ContactEdit = connect(mapDispatchToProps)(_ContactEdit)
+export const ContactEdit = connect(mapStateToProps, mapDispatchToProps)(_ContactEdit)

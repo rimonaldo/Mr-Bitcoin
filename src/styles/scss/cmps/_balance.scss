@@ -1,0 +1,36 @@
+.chart-container {
+   display: flex;
+   justify-content: space-between;
+
+   .b-header {
+      color: gray;
+      font-size: 12px;
+   }
+
+   .current {
+      display: flex;
+      div {
+         margin-inline-start: 4px;
+         display: flex;
+         align-items: center;
+
+         .fa-b {
+            font-size: 14px;
+            margin-inline-end: 2px;
+            &::before {
+               color: $clr1;
+               content: '\f15a';
+            }
+         }
+      }
+   }
+
+   .rate-container {
+      .rate {
+         text-align: center;
+         font-size: 2em;
+      }
+   }
+
+   margin-bottom: 1em;
+}

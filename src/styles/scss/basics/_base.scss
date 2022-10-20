@@ -25,6 +25,7 @@ body {
   // background: -webkit-linear-gradient(90deg, hsla(232, 68%, 59%, 1) 0%, hsla(0, 2%, 12%, 1) 100%);
   background: -moz-linear-gradient(90deg, rgb(19, 23, 51) 0%, hsla(0, 2%, 12%, 1) 100%);
   color: white;
+  overflow-x: hidden;
 }
 
 canvas {

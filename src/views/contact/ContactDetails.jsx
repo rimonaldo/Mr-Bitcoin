@@ -10,11 +10,12 @@ export class _ContactDetailsPage extends React.Component {
    state = {
       contact: null,
       amount: 0,
+      description: ''
    }
 
    // SET CONTACT FROM URL PARAMS
    async componentDidMount() {
-      const contactId = this.props.match.params.id
+      const contactId = this.props.match.params._id
       const contact = await contactService.getContactById(contactId)
       this.setState({ contact })
    }
@@ -32,9 +33,9 @@ export class _ContactDetailsPage extends React.Component {
 
    onSendCoins = async ev => {
       ev.preventDefault()
-      const { amount } = this.state
+      const { amount, description } = this.state
       const to = this.state.contact
-      await this.props.sendCoins(amount, to)
+      await this.props.sendCoins(amount, to, description)
       const userToUpadte = this.props.user
       this.props.saveUser(userToUpadte)
    }
@@ -55,13 +56,28 @@ export class _ContactDetailsPage extends React.Component {
       })
    }
 
+   getMovesFromContact() {
+      const { contact } = this.state
+      const { user } = this.props
+      let moves = user.moves
+      if (!moves) return []
+      return moves.filter(move => {
+         return move.from._id === contact._id
+      })
+   }
+
+   getMovesWithContact() {
+      const from = this.getMovesFromContact()
+      const to = this.getMovesToContact()
+      return [...from, ...to]
+   }
+
    render() {
       const { contact } = this.state
       const { rate } = this.props
       if (!contact) return <div>loading...</div>
       return (
          <section className="contact-details container">
-
             <header>
                <a onClick={this.goBack}>Back</a>
                <Link to={`/contact/edit/${contact._id}`}>
@@ -74,13 +90,17 @@ export class _ContactDetailsPage extends React.Component {
                <div className="name">{contact.name}</div>
             </div>
 
+            <div className="desc"> 
+               <input placeholder='Description(optional)' type="text" name="description" onChange={ev => this.handleChange(ev)} />
+            </div>
+
             <form className="send-coins">
-               <input type="text" name="amount" onChange={ev => this.handleChange(ev)} />
+               <input placeholder='Amount' type="text" name="amount" onChange={ev => this.handleChange(ev)} />
                <button onClick={ev => this.onSendCoins(ev)}>Transfer</button>
             </form>
-
+         
             <div className="moves">
-               <Moves moves={this.getMovesToContact()} rate={rate} />
+               <Moves moves={this.getMovesWithContact()} rate={rate} />
             </div>
          </section>
       )

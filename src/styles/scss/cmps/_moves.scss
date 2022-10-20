@@ -48,6 +48,7 @@
       }
       .fa-b {
          &::before {
+            color: $clr1;
             content: '\f15a';
             font-size: 14px;
             margin-inline-end: 2px;

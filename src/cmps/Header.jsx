@@ -7,11 +7,6 @@ export class Header extends React.Component {
    }
 
    intervalId
-   componentDidMount() {}
-
-   componentWillUnmount() {}
-
-   toggleDark = () => {}
 
    keyIsShown = () => {
       const state = this.state.isKeyShown
@@ -19,7 +14,6 @@ export class Header extends React.Component {
    }
 
    render() {
-      const { setPage } = this.props
       return (
          <section className="header ">
             <div className="right">
@@ -58,7 +52,3 @@ export class Header extends React.Component {
       )
    }
 }
-
-// if no props.history
-// Router functionnality add -->
-// export const Header = withRouter(_Header)

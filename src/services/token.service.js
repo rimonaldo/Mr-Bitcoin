@@ -57,13 +57,15 @@ async function getBalanceByKey(privateKey) {
 }
 
 async function minePending(rewardAddress) {
-   console.log('minig')
+   console.log('minig through address: ', rewardAddress)
    try {
       const user = await userService.getUser()
+      // const toUser = await userService.getById()
       const blocks = await httpService.post('miner/mine', rewardAddress)
       if (!blocks) return false
       user.moves.map(move => (move.status = 'approved'))
       await userService.updateUser(user)
+      
       return blocks
    } catch (err) {
       console.error(err)

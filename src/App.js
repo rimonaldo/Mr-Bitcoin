@@ -1,6 +1,6 @@
 import { Component } from "react"
-import "./assets/scss/global.scss"
-import { BitcoinApp } from "./pages/BitcoinApp"
+import "./styles/scss/global.scss"
+import { BitcoinApp } from "./1_PopCoinApp"
 
 export class App extends Component {
    render() {

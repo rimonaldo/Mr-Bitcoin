@@ -15,7 +15,7 @@
    }
 
    .info {
-      margin-bottom: 2rem;
+      margin-bottom: 2.5rem;
       .avatar {
          width: 130px;
          height: 130px;
@@ -33,26 +33,41 @@
       @media only screen and (min-width: $wide-breakpoint) {
          padding: 0 $large-padding;
       }
+      padding: 0 $layout-padding;
       display: flex;
-      width: 50%;
-      margin: 0 auto;
-      margin-bottom: 2em;
-      input {
-         background-color: $clr2;
-         border: none;
-         width: 100%;
-         margin-inline-end: 1em;
-         border-radius: 5px;
-      }
+      width: max(50%, 300px);
+      margin: 1em auto;
+
       button {
          background-color: $clr1;
          border: none;
          border-radius: 5px;
-         line-height: 1.8em;
          padding: 0 10px;
          color: rgb(233, 233, 233);
          font-size: 1em;
       }
+   }
+   
+   input {
+      padding: 0 10px;
+      background-color: $clr2;
+      border: none;
+      width: 100%;
+      margin-inline-end: 1em;
+      border-radius: 5px;
+      &::placeholder {
+         align-self: center;
+         font-size: 14px;
+      }
+   }
+   .desc {
+      padding: 0 $layout-padding;
+      @media only screen and (min-width: $wide-breakpoint) {
+         padding: 0 $large-padding;
+      }
+      width: max(50%, 300px);
+
+      margin: 0 auto;
    }
    // MOVES
    .moves {

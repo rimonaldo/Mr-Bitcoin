@@ -9,9 +9,10 @@ export function setLoggedUser(username, password) {
          if (password) {
             user = await userService.login(credentials)
          } else {
-            user = await userService.signup(username)
+            user = await userService.signup(credentials)
          }
          dispatch({ type: 'SET_LOGGED_USER', user })
+         
          return user
       } catch (err) {
          console.log(err)
@@ -19,13 +20,13 @@ export function setLoggedUser(username, password) {
    }
 }
 
-export function sendCoins(amount, to) {
+export function sendCoins(amount, to, description) {
    return async dispatch => {
       try {
-         to = await userService.getById(to._id)
          const tx = await tokenService.addTranaction(amount, to)
          const { _id } = tx
-         dispatch({ type: 'SEND_COINS', amount, to, _id })
+         console.log('tx_id', _id);
+         dispatch({ type: 'SEND_COINS', amount, to, _id, description })
       } catch (err) {
          console.log(err)
       }
@@ -44,7 +45,6 @@ export function setBalance(privateKey) {
 }
 
 export function saveUser(userToUpadte) {
-   console.log(userToUpadte)
    return async dispatch => {
       try {
          await userService.updateUser(userToUpadte)

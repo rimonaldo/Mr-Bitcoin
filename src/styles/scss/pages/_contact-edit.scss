@@ -33,10 +33,17 @@
      }
       display: flex;
       align-items: center;
+      justify-content: space-between;
       line-height: 1.5em;
       height: 2.7rem;
       a {
          line-height: 2em;
+      }
+      .delete{
+         cursor: pointer;
+         &:hover{
+            color: $clr7;
+         }
       }
    }
 }

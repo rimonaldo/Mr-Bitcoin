@@ -7,7 +7,43 @@ import { setRate } from '../store/actions/tokenActions'
 import { setBalance } from '../store/actions/userActions'
 import { connect } from 'react-redux'
 
-export class _HomePage extends React.Component {
+export class _AppPage extends React.Component {
+   render() {
+      const { user, chartData, rate } = this.state
+      const { balance } = this.props
+      if (!chartData) return <div>Loading...</div>
+      return (
+         <section>
+            <section className="home container">
+               <div className="balance-container">
+                  <header>Hi, {user.username}</header>
+                  <div className="chart-container">
+                     <div className="balance">
+                        <div className="b-header">CURRENT BALANCE</div>
+                        <div className="current">
+                           POP{' '}
+                           <div>
+                              <div className="fa-b"></div>
+                              <span>{balance}</span>
+                           </div>
+                        </div>
+
+                        <span>USD ${(user.coins * rate).toFixed(2).toLocaleString()}</span>
+                     </div>
+
+                     <div className="rate-container">
+                        <div className="b-header">CURRENT PRICE PER COIN</div>
+                        <div className="rate">${rate.toLocaleString()}</div>
+                     </div>
+                  </div>
+                  {chartData ? <BarChart chartData={chartData} /> : ''}
+               </div>
+               {user.moves ? <Moves moves={user.moves} amount={5} rate={rate} /> : ''}
+            </section>
+         </section>
+      )
+   }
+
    state = {
       user: {},
       rate: '',
@@ -68,44 +104,6 @@ export class _HomePage extends React.Component {
    componentWillUnmount() {}
 
    setBalance({ privateKey }) {}
-
-   render() {
-      const { user, chartData, rate } = this.state
-      const { balance } = this.props
-      if (!chartData) return <div>Loading...</div>
-      return (
-         <section>
-            <section className="home container">
-               <div className="balance-container">
-                  <header>Hi, {user.username}</header>
-                  <div className="chart-container">
-                     
-                     <div className="balance">
-                        <div className="b-header">CURRENT BALANCE</div>
-                        <div className="current">
-                           POP:{' '}
-                           <div>
-                              <div className="fa-b"></div>
-                              <span>{balance}</span>
-                           </div>
-                        </div>
-
-                        <span>USD: ${(user.coins * rate).toFixed(2).toLocaleString()}</span>
-                     </div>
-
-                     <div className="rate-container">
-                        <div className="b-header">CURRENT PRICE PER COIN</div>
-                        <div className="rate">${rate.toLocaleString()}</div>
-                     </div>
-
-                  </div>
-                  {chartData ? <BarChart chartData={chartData} /> : ''}
-               </div>
-               {user.moves ? <Moves moves={user.moves} amount={5} rate={rate} /> : ''}
-            </section>
-         </section>
-      )
-   }
 }
 
 // REDUX CONFIGORATION
@@ -119,4 +117,4 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = { setRate, setBalance }
 
-export const HomePage = connect(mapStateToProps, mapDispatchToProps)(_HomePage)
+export const AppPage = connect(mapStateToProps, mapDispatchToProps)(_AppPage)

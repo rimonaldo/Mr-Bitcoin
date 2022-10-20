@@ -1,4 +1,4 @@
-import { userService } from "../../services/user.service"
+import { userService } from '../../services/user.service'
 
 const INITIAL_STATE = {
    loggedUser: JSON.parse(sessionStorage.getItem('loggedUser')) || null,
@@ -22,27 +22,26 @@ export function userReducer(state = INITIAL_STATE, action) {
 
       case 'SEND_COINS':
          const { loggedUser } = state
-         const { username, walletAddress } = loggedUser
+         const { username, walletAddress, _id } = loggedUser
          const move = {
-            status:'pending',
-            from: { username, walletAddress },
+            status: 'pending',
+            from: { username, walletAddress, _id },
             at: Date.now(),
             amount: action.amount,
-            _id:action._id,
-            to: { name: action.to.username, walletAddress: 'address', _id: action.to._id },
+            _id: action._id,
+            to: { username: action.to.username, _id: action.to._id },
          }
+         if (action.description) move.description = action.description
+         console.log('move description: \n, ', move.description)
          let moves = loggedUser.moves
          if (!moves || !moves.length) moves = []
          moves.unshift(move)
          let toMoves = action.to.moves
-         
-         console.log('moves',action.to.moves);
          if (!toMoves || !toMoves.length) toMoves = []
          move.recived = true
          toMoves.unshift(move)
-         action.moves = toMoves
-         action.to.toMoves = [...toMoves]
-         userService.updateUser(action.to)         
+         action.to.moves = [...toMoves]
+         userService.updateUser(action.to)
          return {
             ...state,
             loggedUser: {
